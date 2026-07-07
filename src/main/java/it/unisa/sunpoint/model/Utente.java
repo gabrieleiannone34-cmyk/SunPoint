@@ -1,4 +1,4 @@
-package it.unisa.sunpoint.control;
+package it.unisa.sunpoint.model;
 
 import java.io.Serializable;
 

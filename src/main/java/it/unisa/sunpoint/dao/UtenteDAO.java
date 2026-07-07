@@ -1,4 +1,4 @@
-package it.unisa.sunpoint.model;
+package it.unisa.sunpoint.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import it.unisa.sunpoint.control.Utente;
+import it.unisa.sunpoint.model.Utente;
 
 public class UtenteDAO {
 
