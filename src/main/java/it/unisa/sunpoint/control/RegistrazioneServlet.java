@@ -14,19 +14,19 @@ import java.io.IOException;
 import it.unisa.sunpoint.model.Utente;
 import it.unisa.sunpoint.dao.UtenteDAO;
 
-@WebServlet("/RegistrazioneServlet")
+//@WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Se qualcuno prova ad accedere alla servlet via URL diretto, lo rimandiamo al form
-        response.sendRedirect("registrazione.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp");
+	    dispatcher.forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 		//Recupo dei parametri dalla form
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
