@@ -73,4 +73,39 @@ public class ProdottoDAO {
 		}
 		return prodotti;
 	}
+	// Metodo per estrarre un singolo prodotto usando il suo ID
+	public synchronized Prodotto doRetrieveById(int id) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Prodotto bean = null;
+        
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
+        try {
+            connection = ds.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, id); // Sostituiamo il "?" con l'ID richiesto
+            resultSet = preparedStatement.executeQuery();
+            
+         // Usiamo 'if' e non 'while' perché l'ID è unico, troveremo massimo una riga
+            if(resultSet.next()) {
+            	bean = new Prodotto();
+                bean.setId(resultSet.getInt("id"));
+                bean.setNome(resultSet.getString("nome"));
+                bean.setDescrizione(resultSet.getString("descrizione"));
+                bean.setPrezzo(resultSet.getDouble("prezzo"));
+                bean.setQuantita(resultSet.getInt("quantita"));
+                bean.setImagePath(resultSet.getString("image_path"));
+            }
+        } finally {
+        	try {
+        		if(resultSet != null) resultSet.close();
+        	} finally {
+        		try {
+        			if(connection != null) connection.close();
+        		}
+        	}
+        	return bean; // Restituisce l'occhiale trovato (o null se non esiste)
+        }
+	}
 }
