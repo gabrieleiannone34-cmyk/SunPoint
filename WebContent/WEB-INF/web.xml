@@ -51,6 +51,7 @@
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     
+    
     <servlet>
         <servlet-name>CatalogoServlet</servlet-name>
         <servlet-class>it.unisa.sunpoint.control.CatalogoServlet</servlet-class>
@@ -59,5 +60,16 @@
     <servlet-mapping>
         <servlet-name>CatalogoServlet</servlet-name>
         <url-pattern>/CatalogoServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>CarrelloServlet</servlet-name>
+        <servlet-class>it.unisa.sunpoint.control.CarrelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CarrelloServlet</servlet-name>
+        <url-pattern>/CarrelloServlet</url-pattern>
     </servlet-mapping>
 </web-app>
