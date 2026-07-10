@@ -78,18 +78,19 @@ public class ProdottoDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Prodotto bean = null;
-        
+        Prodotto bean = null; // Partiamo con un occhiale vuoto
+
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
+
         try {
             connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             preparedStatement.setInt(1, id); // Sostituiamo il "?" con l'ID richiesto
             resultSet = preparedStatement.executeQuery();
-            
-         // Usiamo 'if' e non 'while' perché l'ID è unico, troveremo massimo una riga
-            if(resultSet.next()) {
-            	bean = new Prodotto();
+
+            // Usiamo 'if' e non 'while' perché l'ID è unico, troveremo massimo una riga
+            if (resultSet.next()) {
+                bean = new Prodotto();
                 bean.setId(resultSet.getInt("id"));
                 bean.setNome(resultSet.getString("nome"));
                 bean.setDescrizione(resultSet.getString("descrizione"));
@@ -110,3 +111,4 @@ public class ProdottoDAO {
         }
         return bean; // Restituisce l'occhiale trovato (o null se non esiste)
     }
+}
