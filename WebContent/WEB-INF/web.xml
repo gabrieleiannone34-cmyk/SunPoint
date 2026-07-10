@@ -51,4 +51,13 @@
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>CatalogoServlet</servlet-name>
+        <servlet-class>it.unisa.sunpoint.control.CatalogoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CatalogoServlet</servlet-name>
+        <url-pattern>/CatalogoServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
