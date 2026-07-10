@@ -98,14 +98,15 @@ public class ProdottoDAO {
                 bean.setImagePath(resultSet.getString("image_path"));
             }
         } finally {
-        	try {
-        		if(resultSet != null) resultSet.close();
-        	} finally {
-        		try {
-        			if(connection != null) connection.close();
-        		}
-        	}
-        	return bean; // Restituisce l'occhiale trovato (o null se non esiste)
+            try {
+                if (resultSet != null) resultSet.close();
+            } finally {
+                try {
+                    if (preparedStatement != null) preparedStatement.close();
+                } finally {
+                    if (connection != null) connection.close();
+                }
+            }
         }
-	}
-}
+        return bean; // Restituisce l'occhiale trovato (o null se non esiste)
+    }
