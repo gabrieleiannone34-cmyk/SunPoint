@@ -43,6 +43,9 @@
         
         <h3>Totale da pagare: € <%= totale %></h3>
         <button>Procedi al Checkout</button>
+        <br>
+        
+        <a href="${pageContext.request.contextPath}/SvuotaCarrelloServlet">Svuota il Carrello</a>
         
 	<%-- Se il carrello non esiste o è vuoto --%>
     <% } else { %>
