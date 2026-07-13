@@ -83,4 +83,15 @@
         <servlet-name>SvuotaCarrelloServlet</servlet-name>
         <url-pattern>/SvuotaCarrelloServlet</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>it.unisa.sunpoint.control.CheckoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/CheckoutServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
