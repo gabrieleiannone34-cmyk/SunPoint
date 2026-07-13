@@ -15,7 +15,6 @@
     <h2>La nostra Collezione di Occhiali da Sole 🕶️</h2>
     <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
     <a href="${pageContext.request.contextPath}/carrello.jsp">Vai al Carrello </a>
-    <hr>
 
     <%-- Controllo: la lista esiste e ha almeno un elemento? --%>
     <% if (prodotti != null && !prodotti.isEmpty()) { %>
