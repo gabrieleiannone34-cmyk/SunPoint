@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 import it.unisa.sunpoint.model.Ordine;
 
-public class OrdineDao {
+public class OrdineDAO {
 	private static DataSource ds;
 	
 	static {
