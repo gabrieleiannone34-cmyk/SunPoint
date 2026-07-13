@@ -72,4 +72,15 @@
         <servlet-name>CarrelloServlet</servlet-name>
         <url-pattern>/CarrelloServlet</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>SvuotaCarrelloServlet</servlet-name>
+        <servlet-class>it.unisa.sunpoint.control.SvuotaCarrelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SvuotaCarrelloServlet</servlet-name>
+        <url-pattern>/SvuotaCarrelloServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
