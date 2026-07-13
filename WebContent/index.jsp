@@ -14,7 +14,17 @@
 	<h1>SunPoint</h1>
 	
 	<% if(utenteLoggato != null) { %>
-		<p> <%= utenteLoggato.getNome()%> <%= utenteLoggato.getCognome()%>Ben tornato/a</p>
+		<p> <%= utenteLoggato.getNome()%> <%= utenteLoggato.getCognome()%> Ben tornato/a</p>
+		
+		<h3>Cosa vuoi fare oggi?</h3>
+		<ul>
+   			<li>
+        		<a href="${pageContext.request.contextPath}/CatalogoServlet">🕶️ Vai al Catalogo Occhiali</a>
+    		</li>
+    		<li>
+        		<a href="${pageContext.request.contextPath}/carrello.jsp">🛒 Visualizza il tuo Carrello</a>
+    		</li>
+		</ul>
 		
 		<% if ("admin".equals(utenteLoggato.getRole())) { %>
             <p><em>(Hai i privilegi di Amministratore)</em></p>
