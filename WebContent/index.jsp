@@ -19,10 +19,10 @@
 		<h3>Cosa vuoi fare oggi?</h3>
 		<ul>
    			<li>
-        		<a href="${pageContext.request.contextPath}/CatalogoServlet">🕶️ Vai al Catalogo Occhiali</a>
+        		<a href="${pageContext.request.contextPath}/CatalogoServlet">Vai al Catalogo Occhiali</a>
     		</li>
     		<li>
-        		<a href="${pageContext.request.contextPath}/carrello.jsp">🛒 Visualizza il tuo Carrello</a>
+        		<a href="${pageContext.request.contextPath}/carrello.jsp">Visualizza il tuo Carrello</a>
     		</li>
 		</ul>
 		
