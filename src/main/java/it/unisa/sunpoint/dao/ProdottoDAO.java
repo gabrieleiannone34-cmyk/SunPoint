@@ -111,4 +111,31 @@ public class ProdottoDAO {
         }
         return bean; // Restituisce l'occhiale trovato (o null se non esiste)
     }
+	
+	// Metodo per scalare di 1 la quantità di un prodotto venduto
+    public synchronized void aggiornaQuantita(int idProdotto) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        // La query UPDATE: prende la quantità attuale e le sottrae 1
+        String updateSQL = "UPDATE Prodotti SET quantita = quantita - 1 WHERE id = ?";
+
+        try {
+            connection = ds.getConnection();
+            preparedStatement = connection.prepareStatement(updateSQL);
+            
+            // Sostituiamo il "?" con l'ID dell'occhiale venduto
+            preparedStatement.setInt(1, idProdotto);
+
+            // Eseguiamo la modifica nel database
+            preparedStatement.executeUpdate();
+
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } finally {
+                if (connection != null) connection.close();
+            }
+        }
+    }
 }
