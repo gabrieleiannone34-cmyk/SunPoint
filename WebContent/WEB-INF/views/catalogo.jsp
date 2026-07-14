@@ -17,7 +17,7 @@
     String errore = request.getParameter("errore");
     if ("esaurito".equals(errore)) {
 	%>
-        <h3 style="color: red;">⚠Spiacenti, scorte esaurite per questo occhiale!</h3>
+        <h3 style="color: red;">Spiacenti, scorte esaurite per questo occhiale!</h3>
 	<%
     }
 	%>
