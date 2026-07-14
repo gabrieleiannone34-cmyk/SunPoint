@@ -8,6 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
+
+import it.unisa.sunpoint.dao.CarrelloDAO;
+import it.unisa.sunpoint.model.Prodotto;
+import it.unisa.sunpoint.model.Utente;
 
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,8 +22,21 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		
 		if(session != null) {
-			//Distrugge fisicamente la sessione in memoria 
-			session.invalidate();
+			Utente utente = (Utente) session.getAttribute("utenteLoggato");
+			List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
+			
+			//Se l'utente era loggato e aveva roba nel carrello, SALVIAMO NEL DB!
+			if (utente != null && carrello != null && !carrello.isEmpty()) {
+                CarrelloDAO carrelloDAO = new CarrelloDAO();
+                try {
+                    carrelloDAO.salvaCarrello(utente.getId(), carrello);
+                } catch (java.sql.SQLException e) {
+                    System.out.println("Errore salvataggio carrello al logout: " + e.getMessage());
+                }
+            }
+            
+            // 3. Ora possiamo distruggere la sessione in totale sicurezza
+            session.invalidate();
 		}
 		
 		//Rimanda l'utente alla home page (che ora lo vedrà come ospite non loggato)
