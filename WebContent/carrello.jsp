@@ -25,9 +25,10 @@
 			<tr>
 				<th>Modello Occhiali</th>
 				<th>Prezzo</th>
+				<th>Azione</th>
 			</tr>
 				
-				<%-- Scorriamo gli occhiali nel carrello uno per uno --%>
+			<%-- Scorriamo gli occhiali nel carrello uno per uno --%>
             <% for(Prodotto p : carrello) { 
                 // Aggiorniamo la somma totale
                 totale += p.getPrezzo();
@@ -36,6 +37,11 @@
                 <tr>
                     <td><%= p.getNome() %></td>
                     <td>€ <%= p.getPrezzo() %></td>
+                    <td><form action="<%= request.getContextPath() %>/RimuoviCarrelloServlet" method="POST">
+                    	<input type="hidden" name="idProdotto" value="<%= p.getId() %>">
+                    		<button type="submit">Rimuovi</button>
+                    	</form> 
+                   	</td>
                 </tr>
             <% } %>
             
