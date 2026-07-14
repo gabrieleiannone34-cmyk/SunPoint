@@ -26,32 +26,52 @@ public class CarrelloServlet extends HttpServlet {
 
 	// Usiamo doPost perché il form nella pagina del catalogo usa method="POST"
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. Catturiamo l'ID degli occhiali che l'utente ha cliccato
+		//Catturiamo l'ID degli occhiali che l'utente ha cliccato
 		int idProdotto = Integer.parseInt(request.getParameter("idProdotto"));
 		
 		ProdottoDAO prodottoDAO = new ProdottoDAO();
 		
 		try {
-			// 2. Andiamo a prendere gli occhiali veri e propri dal database
+			//Andiamo a prendere gli occhiali veri e propri dal database
 			Prodotto occhialeScelto = prodottoDAO.doRetrieveById(idProdotto);
 			
 			if (occhialeScelto != null) {
-				// 3. Apriamo il cassetto della sessione
+				//Apriamo il cassetto della sessione
 				HttpSession session = request.getSession();
 				
-				// 4. Cerchiamo se l'utente ha già un carrello. Se non ce l'ha, ne creiamo uno vuoto.
+				//Cerchiamo se l'utente ha già un carrello. Se non ce l'ha, ne creiamo uno vuoto.
                 List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
                 if (carrello == null) {
                     carrello = new ArrayList<>();
                 }
                 
-            	// 5. Infiliamo gli occhiali nel carrello
-                carrello.add(occhialeScelto);
+                int pezziGiaNelCarrello = 0;
+                for (Prodotto item : carrello) {
+                    if (item.getId() == occhialeScelto.getId()) {
+                        pezziGiaNelCarrello++;
+                    }
+                }
+
+                //LA REGOLA D'ORO: Aggiungiamo al carrello SOLO SE non superiamo le scorte
+                if (pezziGiaNelCarrello < occhialeScelto.getQuantita()) {
+                    
+                    // Ok, c'è ancora disponibilità! Lo aggiungiamo.
+                    carrello.add(occhialeScelto);
+                    session.setAttribute("carrello", carrello);
+                    
+                    // Rimandiamo al carrello per far vedere il prodotto aggiunto
+                    response.sendRedirect(request.getContextPath() + "/carrello.jsp");
+                    
+                } else {
+                    // ERRORE! Le scorte sono finite (o l'utente ha messo nel carrello tutti i pezzi disponibili)
+                    // Rimandiamo l'utente al catalogo avvisandolo dell'errore tramite l'URL
+                    response.sendRedirect(request.getContextPath() + "/CatalogoServlet?errore=esaurito");
+                }
                 
-                // 6. Salviamo il carrello aggiornato di nuovo nel cassetto
+                //Salviamo il carrello aggiornato di nuovo nel cassetto
                 session.setAttribute("carrello", carrello);
 			}
-			// 7. Finito! Rimandiamo l'utente alla pagina del catalogo per continuare gli acquisti
+			//Finito! Rimandiamo l'utente alla pagina del catalogo per continuare gli acquisti
             response.sendRedirect(request.getContextPath() + "/CatalogoServlet");
 		} catch (SQLException e) {
 			e.printStackTrace();
