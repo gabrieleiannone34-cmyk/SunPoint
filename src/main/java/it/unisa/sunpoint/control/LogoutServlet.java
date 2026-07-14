@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import it.unisa.sunpoint.dao.CarrelloDAO;
@@ -30,7 +31,7 @@ public class LogoutServlet extends HttpServlet {
                 CarrelloDAO carrelloDAO = new CarrelloDAO();
                 try {
                     carrelloDAO.salvaCarrello(utente.getId(), carrello);
-                } catch (java.sql.SQLException e) {
+                } catch (SQLException e) {
                     System.out.println("Errore salvataggio carrello al logout: " + e.getMessage());
                 }
             }
