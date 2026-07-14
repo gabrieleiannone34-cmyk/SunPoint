@@ -74,7 +74,6 @@ public class OrdineDAO {
                 preparedStatement.setInt(1, orderId);
                 preparedStatement.setInt(2, p.getId());
                 preparedStatement.setDouble(3, p.getPrezzo());
-                
                 preparedStatement.executeUpdate(); // Spara il comando su MySQL
             }
         } finally {
