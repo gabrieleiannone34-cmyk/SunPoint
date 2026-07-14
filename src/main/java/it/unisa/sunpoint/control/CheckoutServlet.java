@@ -14,6 +14,7 @@ import java.util.List;
 import it.unisa.sunpoint.model.Ordine;
 import it.unisa.sunpoint.model.Prodotto;
 import it.unisa.sunpoint.model.Utente;
+import it.unisa.sunpoint.dao.CarrelloDAO;
 import it.unisa.sunpoint.dao.OrdineDAO;
 import it.unisa.sunpoint.dao.ProdottoDAO;
 
@@ -55,22 +56,29 @@ public class CheckoutServlet extends HttpServlet {
         try {
         	// 5. Passiamo lo scontrino al DAO per salvarlo in MySQL
         	OrdineDAO ordineDAO = new OrdineDAO();
-            ordineDAO.doSave(nuovoOrdine);
+        	//Salviamo l'ordine e CATTURIAMO l'ID generato
+        	int orderId = ordineDAO.doSave(nuovoOrdine);
+        	
+        	//Se l'ordine è stato salvato correttamente (ID maggiore di zero)
+            if (orderId > 0) {
+                // Salviamo tutti gli articoli in Articoli_ordinati!
+                ordineDAO.salvaArticoliOrdine(orderId, carrello);
+            }
             
-            // Creiamo il DAO dei prodotti
+            //Scaliamo i pezzi dal magazzino 
             ProdottoDAO prodottoDAO = new ProdottoDAO();
-            
-            // Scorriamo tutti gli occhiali che l'utente ha comprato
             for (Prodotto p : carrello) {
-                // Per ogni occhiale, diciamo a MySQL di togliere 1 dal magazzino
                 prodottoDAO.aggiornaQuantita(p.getId());
             }
             
-            // 6. Svuotiamo il carrello (l'acquisto è concluso!)
-            session.removeAttribute("carrello");
+            // Visto che ha pagato, dobbiamo svuotare anche il carrello salvato nel Database
+            CarrelloDAO carrelloDAO = new CarrelloDAO();
+            carrelloDAO.svuotaCarrelloDB(utente.getId());
             
-            // 7. Rimandiamo l'utente a una pagina di ringraziamento
+         // Svuotiamo la sessione e rimandiamo alla conferma
+            session.removeAttribute("carrello");
             response.sendRedirect(request.getContextPath() + "/conferma.jsp");
+            
         } catch (SQLException e) {
         	e.printStackTrace();
             response.getWriter().println("Errore durante il salvataggio dell'ordine nel database.");
