@@ -61,15 +61,13 @@ public class CarrelloServlet extends HttpServlet {
                     
                     // Rimandiamo al carrello per far vedere il prodotto aggiunto
                     response.sendRedirect(request.getContextPath() + "/carrello.jsp");
-                    
+                    return;
                 } else {
                     // ERRORE! Le scorte sono finite (o l'utente ha messo nel carrello tutti i pezzi disponibili)
                     // Rimandiamo l'utente al catalogo avvisandolo dell'errore tramite l'URL
                     response.sendRedirect(request.getContextPath() + "/CatalogoServlet?errore=esaurito");
+                    return;
                 }
-                
-                //Salviamo il carrello aggiornato di nuovo nel cassetto
-                session.setAttribute("carrello", carrello);
 			}
 			//Finito! Rimandiamo l'utente alla pagina del catalogo per continuare gli acquisti
             response.sendRedirect(request.getContextPath() + "/CatalogoServlet");
