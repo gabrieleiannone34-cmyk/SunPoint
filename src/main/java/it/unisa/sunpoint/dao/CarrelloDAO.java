@@ -56,7 +56,7 @@ public class CarrelloDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         // Inseriamo ogni prodotto con quantità 1 (se l'utente ne ha 2 uguali, farà 2 righe separate, perfetto per la tua List)
-        String insertSQL = "INSERT INTO ElementiCarrello (user_id, product_id, quantita) VALUES (?, ?, 1)";
+        String insertSQL = "INSERT INTO ElementiCarrello (user_id, prodotto_id, quantita) VALUES (?, ?, 1)";
 
         try {
             connection = ds.getConnection();
@@ -80,7 +80,7 @@ public class CarrelloDAO {
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
 
-        String selectSQL = "SELECT product_id FROM ElementiCarrello WHERE user_id = ?";
+        String selectSQL = "SELECT prodotto_id FROM ElementiCarrello WHERE user_id = ?";
 
         try {
             connection = ds.getConnection();
@@ -92,7 +92,7 @@ public class CarrelloDAO {
 
             // Per ogni ID prodotto trovato nel database...
             while (rs.next()) {
-                int productId = rs.getInt("product_id");
+            	int productId = rs.getInt("prodotto_id");
                 
                 // ...usiamo il ProdottoDAO per recuperare tutte le info (nome, prezzo, ecc.)
                 Prodotto p = prodottoDAO.doRetrieveById(productId); 
