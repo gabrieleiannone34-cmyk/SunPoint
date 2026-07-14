@@ -31,6 +31,7 @@
         <%-- Usiamo una tabella HTML base per impaginare i prodotti --%>
         <table>
             <tr>
+            	<th>Immagine</th>
                 <th>Nome Modello</th>
                 <th>Descrizione</th>
                 <th>Prezzo</th>
@@ -42,6 +43,7 @@
             <% for(Prodotto p : prodotti) { %>
                 
                 <tr>
+                	<td><img src="<%= request.getContextPath() %>/images/<%= p.getImagePath() %>" width="100" alt="<%= p.getNome() %>"></td>
                     <td><%= p.getNome() %></td>
                     <td><%= p.getDescrizione() %></td>
                     <td>€ <%= p.getPrezzo() %></td>
