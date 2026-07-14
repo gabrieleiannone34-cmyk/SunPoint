@@ -14,7 +14,7 @@ import java.io.IOException;
 import it.unisa.sunpoint.model.Utente;
 import it.unisa.sunpoint.dao.UtenteDAO;
 
-//@WebServlet("/RegistrazioneServlet")
+@WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -61,7 +61,7 @@ public class RegistrazioneServlet extends HttpServlet {
             request.setAttribute("errore", "Errore durante la registrazione. L'email potrebbe essere già in uso.");
             
          // Rimandiamo indietro l'utente alla pagina di registrazione mostrando l'errore
-            RequestDispatcher dispatcher = request.getRequestDispatcher("registrazione.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp");
             dispatcher.forward(request, response);
 		}
 		

@@ -23,7 +23,7 @@
 	%>
     <h2>La nostra Collezione di Occhiali da Sole</h2>
     <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
-    <a href="${pageContext.request.contextPath}/carrello.jsp">Vai al Carrello </a>
+    <a href="${pageContext.request.contextPath}/VisualizzaCarrelloServlet">Vai al Carrello </a>
 
     <%-- Controllo: la lista esiste e ha almeno un elemento? --%>
     <% if (prodotti != null && !prodotti.isEmpty()) { %>
@@ -49,7 +49,7 @@
                     <td>€ <%= p.getPrezzo() %></td>
                     <td><%= p.getQuantita() %> pz</td>
                     <td>
-                        <form action="CarrelloServlet" method="POST">
+                        <form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST">
                             <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
                             <input type="submit" value="Aggiungi al Carrello">
                         </form>

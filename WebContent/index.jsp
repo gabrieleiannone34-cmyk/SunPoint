@@ -22,7 +22,7 @@
         		<a href="${pageContext.request.contextPath}/CatalogoServlet">Vai al Catalogo Occhiali</a>
     		</li>
     		<li>
-        		<a href="${pageContext.request.contextPath}/carrello.jsp">Visualizza il tuo Carrello</a>
+        		<a href="${pageContext.request.contextPath}/VisualizzaCarrelloServlet">Visualizza il tuo Carrello</a>
     		</li>
 		</ul>
 		
@@ -30,11 +30,11 @@
             <p><em>(Hai i privilegi di Amministratore)</em></p>
         <% } %>
         <br>
-        <a href="LogoutServlet"><button>Esci (Logout)</button></a>
+        <a href="${pageContext.request.contextPath}/LogoutServlet"><button>Esci (Logout)</button></a>
         
 	<% } else { %>
 		<p>Non sei autenticato. Accedi per acquistare prodotti.</p>
-        <a href="LoginServlet">Accedi</a> | <a href="RegistrazioneServlet">Registrati</a>
+        <a href="${pageContext.request.contextPath}/LoginServlet">Accedi</a> | <a href="${pageContext.request.contextPath}/RegistrazioneServlet">Registrati</a>
     <% } %>
 </body>
 </html>

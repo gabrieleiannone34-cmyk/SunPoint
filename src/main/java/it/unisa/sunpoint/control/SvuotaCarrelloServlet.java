@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+@WebServlet("/SvuotaCarrelloServlet")
 public class SvuotaCarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +23,7 @@ public class SvuotaCarrelloServlet extends HttpServlet {
 		session.removeAttribute("carrello");
 		
 		//Rimandiamo l'utente alla pagina del carello (che ora risulterà vuoto)
-		response.sendRedirect(request.getContextPath() + "/carrello.jsp");
+		response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
 }
 
 

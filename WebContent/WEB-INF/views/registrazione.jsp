@@ -15,7 +15,7 @@
 	%>
 		<p> ERRORE: <%= errore %></p>
 	<% } %>
-	<form action="RegistrazioneServlet" method="POST">
+	<form action="${pageContext.request.contextPath}/RegistrazioneServlet" method="POST">
 		<label for="nome">Nome:</label><br>
 		<input type="text" id="nome" name="nome" required><br>
 		
@@ -25,7 +25,7 @@
 		<label for="email">Email:</label><br>
 		<input type="email" id="email" name="email" required><br>
 		
-		<label for="email">Password:</label><br>
+		<label for="password">Password:</label><br>
 		<input type="password" id="password" name="password" required><br>
 		
 		<label for="indirizzo">Indirizzo:</label><br>

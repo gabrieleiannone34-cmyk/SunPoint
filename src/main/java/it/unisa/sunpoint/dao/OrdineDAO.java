@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -81,5 +82,39 @@ public class OrdineDAO {
             if (connection != null) connection.close();
         }
 	}
+	// Nuovo metodo per estrarre lo storico ordini di un cliente
+		public synchronized List<Ordine> doRetrieveByUserId(int userId) throws SQLException {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			ResultSet rs = null;
+			
+			// Creiamo una lista vuota per contenere gli ordini trovati
+			List<Ordine> ordini = new ArrayList<>();
+			
+			// Li ordiniamo in modo decrescente (dal più recente al più vecchio)
+			String selectSQL = "SELECT * FROM Ordini WHERE user_id = ? ORDER BY id DESC";
+			
+			try {
+				connection = ds.getConnection();
+				preparedStatement = connection.prepareStatement(selectSQL);
+				preparedStatement.setInt(1, userId);
+				rs = preparedStatement.executeQuery();
+				
+				while (rs.next()) {
+					Ordine ordine = new Ordine();
+					ordine.setId(rs.getInt("id"));
+					ordine.setUserId(rs.getInt("user_id"));
+					ordine.setTotale(rs.getDouble("totale"));
+		
+					ordini.add(ordine);
+				}
+			} finally {
+				if (rs != null) rs.close();
+				if (preparedStatement != null) preparedStatement.close();
+				if (connection != null) connection.close();
+			}
+			
+			return ordini;
+		}
 }
 

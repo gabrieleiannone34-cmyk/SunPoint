@@ -47,7 +47,7 @@ public class RimuoviCarrelloServlet extends HttpServlet {
          }
       }
      // 5. Ricarichiamo la pagina del carrello, che ora mostrerà un occhiale in meno!
-     response.sendRedirect(request.getContextPath() + "/carrello.jsp");
+        response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
 	}
 
 }

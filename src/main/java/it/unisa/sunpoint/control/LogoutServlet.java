@@ -15,6 +15,7 @@ import it.unisa.sunpoint.dao.CarrelloDAO;
 import it.unisa.sunpoint.model.Prodotto;
 import it.unisa.sunpoint.model.Utente;
 
+@WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       

@@ -18,7 +18,7 @@ import it.unisa.sunpoint.dao.CarrelloDAO;
 import it.unisa.sunpoint.dao.OrdineDAO;
 import it.unisa.sunpoint.dao.ProdottoDAO;
 
-
+@WebServlet("/CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,12 +33,12 @@ public class CheckoutServlet extends HttpServlet {
 		
 		// 2. Controlli di sicurezza: l'utente deve essere loggato e il carrello non deve essere vuoto
 		if (utente == null) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
             return;
         }
         
         if (carrello == null || carrello.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/carrello.jsp");
+        	response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
             return;
         }
         
@@ -77,7 +77,7 @@ public class CheckoutServlet extends HttpServlet {
             
          // Svuotiamo la sessione e rimandiamo alla conferma
             session.removeAttribute("carrello");
-            response.sendRedirect(request.getContextPath() + "/conferma.jsp");
+            request.getRequestDispatcher("/WEB-INF/view/conferma.jsp").forward(request, response);
             
         } catch (SQLException e) {
         	e.printStackTrace();

@@ -15,13 +15,13 @@ import java.util.List;
 import it.unisa.sunpoint.dao.ProdottoDAO;
 import it.unisa.sunpoint.model.Prodotto;
 
+@WebServlet("/CarrelloServlet")
 public class CarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	// Usiamo doPost perché il form nella pagina del catalogo usa method="POST"
@@ -60,7 +60,7 @@ public class CarrelloServlet extends HttpServlet {
                     session.setAttribute("carrello", carrello);
                     
                     // Rimandiamo al carrello per far vedere il prodotto aggiunto
-                    response.sendRedirect(request.getContextPath() + "/carrello.jsp");
+                    response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
                     return;
                 } else {
                     // ERRORE! Le scorte sono finite (o l'utente ha messo nel carrello tutti i pezzi disponibili)
