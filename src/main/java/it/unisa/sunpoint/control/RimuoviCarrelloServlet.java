@@ -12,6 +12,7 @@ import java.util.List;
 
 import it.unisa.sunpoint.model.Prodotto;
 
+@WebServlet("/RimuoviCarrelloServlet")
 public class RimuoviCarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
