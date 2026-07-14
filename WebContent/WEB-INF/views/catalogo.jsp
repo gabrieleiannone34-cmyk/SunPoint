@@ -12,6 +12,15 @@
     <title>Catalogo Occhiali - SunPoint</title>
 </head>
 <body>
+	<%
+    // Se nell'URL c'è scritto "errore=esaurito", mostriamo un avviso
+    String errore = request.getParameter("errore");
+    if ("esaurito".equals(errore)) {
+	%>
+        <h3 style="color: red;">⚠Spiacenti, scorte esaurite per questo occhiale!</h3>
+	<%
+    }
+	%>
     <h2>La nostra Collezione di Occhiali da Sole</h2>
     <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
     <a href="${pageContext.request.contextPath}/carrello.jsp">Vai al Carrello </a>
