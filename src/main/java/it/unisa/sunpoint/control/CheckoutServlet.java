@@ -15,6 +15,7 @@ import it.unisa.sunpoint.model.Ordine;
 import it.unisa.sunpoint.model.Prodotto;
 import it.unisa.sunpoint.model.Utente;
 import it.unisa.sunpoint.dao.OrdineDAO;
+import it.unisa.sunpoint.dao.ProdottoDAO;
 
 
 public class CheckoutServlet extends HttpServlet {
@@ -55,6 +56,15 @@ public class CheckoutServlet extends HttpServlet {
         	// 5. Passiamo lo scontrino al DAO per salvarlo in MySQL
         	OrdineDAO ordineDAO = new OrdineDAO();
             ordineDAO.doSave(nuovoOrdine);
+            
+            // Creiamo il DAO dei prodotti
+            ProdottoDAO prodottoDAO = new ProdottoDAO();
+            
+            // Scorriamo tutti gli occhiali che l'utente ha comprato
+            for (Prodotto p : carrello) {
+                // Per ogni occhiale, diciamo a MySQL di togliere 1 dal magazzino
+                prodottoDAO.aggiornaQuantita(p.getId());
+            }
             
             // 6. Svuotiamo il carrello (l'acquisto è concluso!)
             session.removeAttribute("carrello");
