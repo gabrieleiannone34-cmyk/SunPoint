@@ -25,7 +25,6 @@
 			<tr>
 				<th>Modello Occhiali</th>
 				<th>Prezzo</th>
-				<th>Azione</th>
 			</tr>
 				
 			<%-- Scorriamo gli occhiali nel carrello uno per uno --%>
