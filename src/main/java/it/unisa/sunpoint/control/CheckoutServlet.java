@@ -77,7 +77,7 @@ public class CheckoutServlet extends HttpServlet {
             
          // Svuotiamo la sessione e rimandiamo alla conferma
             session.removeAttribute("carrello");
-            request.getRequestDispatcher("/WEB-INF/view/conferma.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/conferma.jsp").forward(request, response);
             
         } catch (SQLException e) {
         	e.printStackTrace();
