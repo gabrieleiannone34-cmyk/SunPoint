@@ -75,6 +75,9 @@ public class CheckoutServlet extends HttpServlet {
             CarrelloDAO carrelloDAO = new CarrelloDAO();
             carrelloDAO.svuotaCarrelloDB(utente.getId());
             
+         // Mettiamo il numero dell'ordine nello zaino per la pagina JSP
+            request.setAttribute("numeroOrdine", orderId);
+            
          // Svuotiamo la sessione e rimandiamo alla conferma
             session.removeAttribute("carrello");
             request.getRequestDispatcher("/WEB-INF/views/conferma.jsp").forward(request, response);

@@ -138,4 +138,28 @@ public class ProdottoDAO {
             }
         }
     }
+ // Metodo ESCLUSIVO per l'Admin: inserisce un nuovo prodotto nel catalogo
+ 	public synchronized void doSave(Prodotto prodotto) throws SQLException {
+ 		Connection connection = null;
+ 		PreparedStatement preparedStatement = null;
+
+ 		String insertSQL = "INSERT INTO Prodotti (nome, descrizione, prezzo, quantita, image_path) VALUES (?, ?, ?, ?, ?)";
+
+ 		try {
+ 			connection = ds.getConnection();
+ 			preparedStatement = connection.prepareStatement(insertSQL);
+
+ 			preparedStatement.setString(1, prodotto.getNome());
+ 			preparedStatement.setString(2, prodotto.getDescrizione());
+ 			preparedStatement.setDouble(3, prodotto.getPrezzo());
+ 			preparedStatement.setInt(4, prodotto.getQuantita());
+ 			preparedStatement.setString(5, prodotto.getImagePath());
+
+ 			preparedStatement.executeUpdate();
+
+ 		} finally {
+ 			if (preparedStatement != null) preparedStatement.close();
+ 			if (connection != null) connection.close();
+ 		}
+ 	}
 }

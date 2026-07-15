@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <h2>Grazie per il tuo acquisto! 🎉</h2>
+    <h2>Grazie per il tuo acquisto! </h2>
     <p>Il tuo ordine è stato registrato con successo</p>
     <p>I tuoi nuovi occhiali da sole arriveranno il prima possibile.</p>
     
