@@ -31,6 +31,7 @@
 		
 		<% if ("admin".equals(utenteLoggato.getRole())) { %>
             <p><em>(Hai i privilegi di Amministratore)</em></p>
+            <a href="${pageContext.request.contextPath}/InserisciProdottoServlet">Inserisci un Nuovo Occhiale</a>
         <% } %>
         <br>
         <a href="${pageContext.request.contextPath}/LogoutServlet"><button>Esci (Logout)</button></a>
