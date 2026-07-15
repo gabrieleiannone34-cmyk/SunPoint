@@ -24,6 +24,9 @@
     		<li>
         		<a href="${pageContext.request.contextPath}/VisualizzaCarrelloServlet">Visualizza il tuo Carrello</a>
     		</li>
+    		<li>
+        		<a href="${pageContext.request.contextPath}/StoricoOrdiniServlet">I Miei Ordini</a>
+    		</li>
 		</ul>
 		
 		<% if ("admin".equals(utenteLoggato.getRole())) { %>
