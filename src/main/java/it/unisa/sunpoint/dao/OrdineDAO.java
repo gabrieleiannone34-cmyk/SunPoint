@@ -116,5 +116,38 @@ public class OrdineDAO {
 			
 			return ordini;
 		}
+	// Metodo ESCLUSIVO per l'Admin: recupera TUTTI gli ordini del negozio
+		public synchronized List<Ordine> doRetrieveAll() throws SQLException {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			ResultSet rs = null;
+			
+			List<Ordine> tuttiOrdini = new ArrayList<>();
+			
+			// Li ordiniamo dal più recente al più vecchio
+			String selectSQL = "SELECT * FROM Ordini ORDER BY id DESC";
+			
+			try {
+				connection = ds.getConnection();
+				preparedStatement = connection.prepareStatement(selectSQL);
+				rs = preparedStatement.executeQuery();
+				
+				while (rs.next()) {
+					Ordine ordine = new Ordine();
+					ordine.setId(rs.getInt("id"));
+					ordine.setUserId(rs.getInt("user_id")); 
+					ordine.setTotale(rs.getDouble("totale"));
+					
+					tuttiOrdini.add(ordine);
+			}
+			
+		} finally {
+			if (rs != null) rs.close();
+			if (preparedStatement != null) preparedStatement.close();
+			if (connection != null) connection.close();
+		}
+			
+			return tuttiOrdini;
+	}
 }
 
