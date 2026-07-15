@@ -22,15 +22,13 @@
 		<table>
 			<tr>
 				<th>Numero Ordine</th>
-				<th>Data Ordine</th>
-				<th>Totale Pagato</th>ù
+				<th>Totale Pagato</th>
 			</tr>
 			
 			<%-- Cicliamo su tutti gli ordini --%>
 			<% for(Ordine o: ordini) { %>
 				<tr>
 					<td># <%= o.getId() %></td>
-					<td>Data: <%= o.getDataOrdine() %></td>
 					<td>€ <%= o.getTotale() %></td>
 				</tr>
 			<% } %>
