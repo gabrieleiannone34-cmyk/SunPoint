@@ -83,71 +83,126 @@ public class OrdineDAO {
         }
 	}
 	// Nuovo metodo per estrarre lo storico ordini di un cliente
-		public synchronized List<Ordine> doRetrieveByUserId(int userId) throws SQLException {
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
-			ResultSet rs = null;
+	public synchronized List<Ordine> doRetrieveByUserId(int userId) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
 			
-			// Creiamo una lista vuota per contenere gli ordini trovati
-			List<Ordine> ordini = new ArrayList<>();
+		// Creiamo una lista vuota per contenere gli ordini trovati
+		List<Ordine> ordini = new ArrayList<>();
 			
-			// Li ordiniamo in modo decrescente (dal più recente al più vecchio)
-			String selectSQL = "SELECT * FROM Ordini WHERE user_id = ? ORDER BY id DESC";
+		// Li ordiniamo in modo decrescente (dal più recente al più vecchio)
+		String selectSQL = "SELECT * FROM Ordini WHERE user_id = ? ORDER BY id DESC";
 			
-			try {
-				connection = ds.getConnection();
-				preparedStatement = connection.prepareStatement(selectSQL);
-				preparedStatement.setInt(1, userId);
-				rs = preparedStatement.executeQuery();
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, userId);
+			rs = preparedStatement.executeQuery();
 				
-				while (rs.next()) {
-					Ordine ordine = new Ordine();
-					ordine.setId(rs.getInt("id"));
-					ordine.setUserId(rs.getInt("user_id"));
-					ordine.setTotale(rs.getDouble("totale"));
+			while (rs.next()) {
+				Ordine ordine = new Ordine();
+				ordine.setId(rs.getInt("id"));
+				ordine.setUserId(rs.getInt("user_id"));
+				ordine.setTotale(rs.getDouble("totale"));
 		
-					ordini.add(ordine);
-				}
-			} finally {
-				if (rs != null) rs.close();
-				if (preparedStatement != null) preparedStatement.close();
-				if (connection != null) connection.close();
+				ordini.add(ordine);
 			}
-			
-			return ordini;
-		}
-	// Metodo ESCLUSIVO per l'Admin: recupera TUTTI gli ordini del negozio
-		public synchronized List<Ordine> doRetrieveAll() throws SQLException {
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
-			ResultSet rs = null;
-			
-			List<Ordine> tuttiOrdini = new ArrayList<>();
-			
-			// Li ordiniamo dal più recente al più vecchio
-			String selectSQL = "SELECT * FROM Ordini ORDER BY id DESC";
-			
-			try {
-				connection = ds.getConnection();
-				preparedStatement = connection.prepareStatement(selectSQL);
-				rs = preparedStatement.executeQuery();
-				
-				while (rs.next()) {
-					Ordine ordine = new Ordine();
-					ordine.setId(rs.getInt("id"));
-					ordine.setUserId(rs.getInt("user_id")); 
-					ordine.setTotale(rs.getDouble("totale"));
-					
-					tuttiOrdini.add(ordine);
-			}
-			
 		} finally {
 			if (rs != null) rs.close();
 			if (preparedStatement != null) preparedStatement.close();
 			if (connection != null) connection.close();
 		}
 			
-			return tuttiOrdini;
+		return ordini;
+	}
+	// Metodo ESCLUSIVO per l'Admin: recupera TUTTI gli ordini del negozio
+	public synchronized List<Ordine> doRetrieveAll() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+			
+		List<Ordine> tuttiOrdini = new ArrayList<>();
+			
+		// Li ordiniamo dal più recente al più vecchio
+		String selectSQL = "SELECT * FROM Ordini ORDER BY id DESC";
+			
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			rs = preparedStatement.executeQuery();
+				
+			while (rs.next()) {
+				Ordine ordine = new Ordine();
+				ordine.setId(rs.getInt("id"));
+				ordine.setUserId(rs.getInt("user_id")); 
+				ordine.setTotale(rs.getDouble("totale"));
+					
+				tuttiOrdini.add(ordine);
+		}
+			
+	} finally {
+		if (rs != null) rs.close();
+		if (preparedStatement != null) preparedStatement.close();
+		if (connection != null) connection.close();
+	}
+			
+		return tuttiOrdini;
+	}
+	
+	// Metodo ESCLUSIVO per l'Admin: recupera ordini filtrati
+	public synchronized List<Ordine> doRetrieveByFilters(String dataInizio, String dataFine, String idCliente) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		List<Ordine> ordiniFiltrati = new java.util.ArrayList<>();
+			
+		// Usiamo "WHERE 1=1" come trucco per poter accodare facilmente gli "AND" successivi
+		StringBuilder query = new StringBuilder("SELECT * FROM Ordini WHERE 1=1");
+			
+		if (dataInizio != null && !dataInizio.isEmpty()) {
+			query.append(" AND data_ordine >= ?");
+		}
+		if (dataFine != null && !dataFine.isEmpty()) {
+			query.append(" AND data_ordine <= ?");
+		}
+		if (idCliente != null && !idCliente.trim().isEmpty()) {
+			query.append(" AND user_id = ?");
+		}
+			
+		query.append(" ORDER BY id DESC");
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(query.toString());
+				
+			int paramIndex = 1;
+			if (dataInizio != null && !dataInizio.isEmpty()) {
+				preparedStatement.setString(paramIndex++, dataInizio);
+			}
+			if (dataFine != null && !dataFine.isEmpty()) {
+				preparedStatement.setString(paramIndex++, dataFine);
+			}
+			if (idCliente != null && !idCliente.trim().isEmpty()) {
+				preparedStatement.setInt(paramIndex++, Integer.parseInt(idCliente));
+			}
+				
+			rs = preparedStatement.executeQuery();
+			
+			while (rs.next()) {
+				Ordine ordine = new Ordine();
+				ordine.setId(rs.getInt("id"));
+				ordine.setUserId(rs.getInt("user_id"));
+				ordine.setTotale(rs.getDouble("totale"));
+				ordiniFiltrati.add(ordine);
+			}
+		} finally {
+			if (rs != null) rs.close();
+			if (preparedStatement != null) preparedStatement.close();
+			if (connection != null) connection.close();
+		}
+			
+		return ordiniFiltrati;
 	}
 }
 
