@@ -162,4 +162,48 @@ public class ProdottoDAO {
  			if (connection != null) connection.close();
  		}
  	}
+ 	//Metodo ESCLUSIVO per admin: Metodo per ELIMINARE un prodotto dal catalogo
+ 	public synchronized boolean doDelete(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+
+		String deleteSQL = "DELETE FROM Prodotti WHERE id = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(deleteSQL);
+			preparedStatement.setInt(1, id);
+
+			result = preparedStatement.executeUpdate();
+		} finally {
+			if (preparedStatement != null) preparedStatement.close();
+			if (connection != null) connection.close();
+		}
+		return (result != 0);
+	}
+ 	//Metodo ESCLUSIVO per admin: Metodo per AGGIORNARE i dati di un prodotto esistente
+ 	public synchronized void doUpdate(Prodotto prodotto) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		String updateSQL = "UPDATE Prodotti SET nome = ?, descrizione = ?, prezzo = ?, quantita = ?, image_path = ? WHERE id = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(updateSQL);
+
+			preparedStatement.setString(1, prodotto.getNome());
+			preparedStatement.setString(2, prodotto.getDescrizione());
+			preparedStatement.setDouble(3, prodotto.getPrezzo());
+			preparedStatement.setInt(4, prodotto.getQuantita());
+			preparedStatement.setString(5, prodotto.getImagePath());
+			preparedStatement.setInt(6, prodotto.getId()); // La clausola WHERE!
+
+			preparedStatement.executeUpdate();
+		} finally {
+			if (preparedStatement != null) preparedStatement.close();
+			if (connection != null) connection.close();
+		}
+	}
 }
