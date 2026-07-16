@@ -25,25 +25,36 @@ public class TuttiOrdiniServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
-		
-		//Solo gli admin possono vedere questa pagina
+
 		if (utente == null || !"admin".equals(utente.getRole())) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			return;
 		}
-		
+
+		// Catturiamo i filtri dalla richiesta (se ci sono)
+		String dataInizio = request.getParameter("dataInizio");
+		String dataFine = request.getParameter("dataFine");
+		String idCliente = request.getParameter("idCliente");
+
 		OrdineDAO ordineDAO = new OrdineDAO();
 		try {
-			// L'Admin chiede tutti gli ordini del negozio
-			List<Ordine> tuttiOrdini = ordineDAO.doRetrieveAll();
+			List<Ordine> ordini;
 			
-			// Li mettiamo nello "zaino"
-			request.setAttribute("tuttiOrdini", tuttiOrdini);
-		
-			// Apriamo la porta della pagina riservata
+			// Se c'è almeno un filtro attivo, usiamo la ricerca filtrata
+			if ((dataInizio != null && !dataInizio.isEmpty()) || 
+			    (dataFine != null && !dataFine.isEmpty()) || 
+			    (idCliente != null && !idCliente.trim().isEmpty())) {
+				
+				ordini = ordineDAO.doRetrieveByFilters(dataInizio, dataFine, idCliente);
+			} else {
+				// Altrimenti, mostriamo tutto
+				ordini = ordineDAO.doRetrieveAll();
+			}
+			
+			request.setAttribute("tuttiOrdini", ordini);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/tuttiOrdini.jsp");
 			dispatcher.forward(request, response);
-		
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			response.getWriter().println("Errore durante il recupero degli ordini.");
