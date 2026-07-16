@@ -59,14 +59,27 @@
                         </form>
                     </td>
                 </tr>
+                 
+                <% if (utenteLoggato != null && "admin".equals(utenteLoggato.getRole())) { %>
+            		<div>
+                		<p>Opzioni Admin:</p>
                 
-            <% } // Fine del ciclo FOR %>
-            
+                		<%-- Tasto Modifica (passa l'ID tramite URL) --%>
+                		<a href="${pageContext.request.contextPath}/ModificaProdottoServlet?id=<%= p.getId() %>">Modifica</a>
+                 
+                		<%-- Tasto Elimina (passa l'ID tramite URL e chiede conferma) --%>
+                		<a href="${pageContext.request.contextPath}/CancellaProdottoServlet?id=<%= p.getId() %>">Elimina</a>
+            		</div>
+        		<% } %>
+        	<% } %>
         </table>
+        
 
     <% } else { %>
         <p>Al momento non ci sono occhiali nel catalogo.</p>
     <% } %>
+    
+   
 
 </body>
 </html>
