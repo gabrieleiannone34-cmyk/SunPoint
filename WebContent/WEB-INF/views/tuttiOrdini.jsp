@@ -13,7 +13,23 @@
 <body>
     <h2>Pannello di Controllo - Tutti gli Ordini</h2>
     <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
-    <br><br>
+    <br>
+    <div>
+        <h3>Filtra Ordini</h3>
+        <form action="${pageContext.request.contextPath}/TuttiOrdiniServlet" method="GET">
+            <label for="dataInizio">Da (Data):</label>
+            <input type="date" id="dataInizio" name="dataInizio">
+            
+            <label for="dataFine">A (Data):</label>
+            <input type="date" id="dataFine" name="dataFine">
+            
+            <label for="idCliente">ID Cliente:</label>
+            <input type="number" id="idCliente" name="idCliente" placeholder="Es. 3" min="1">
+            
+            <input type="submit" value="Cerca">
+            <a href="${pageContext.request.contextPath}/TuttiOrdiniServlet">Resetta Filtri</a>
+        </form>
+    </div>
 
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <table>
