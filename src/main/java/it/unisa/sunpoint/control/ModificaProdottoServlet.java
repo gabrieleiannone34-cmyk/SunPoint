@@ -54,6 +54,7 @@ public class ModificaProdottoServlet extends HttpServlet {
 		if (utente == null || !"admin".equals(utente.getRole())) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			return;
+		}
 
 		try {
 			// Recuperiamo i nuovi dati inseriti nel form
@@ -83,5 +84,4 @@ public class ModificaProdottoServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }
