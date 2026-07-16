@@ -57,11 +57,9 @@
                             <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
                             <input type="submit" value="Aggiungi al Carrello">
                         </form>
-                    </td>
-                </tr>
-                 
-                <% if (utenteLoggato != null && "admin".equals(utenteLoggato.getRole())) { %>
-            		<div>
+                    
+                    <% if (utenteLoggato != null && "admin".equals(utenteLoggato.getRole())) { %>
+            		<div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #ccc;">
                 		<p>Opzioni Admin:</p>
                 
                 		<%-- Tasto Modifica (passa l'ID tramite URL) --%>
@@ -71,6 +69,10 @@
                 		<a href="${pageContext.request.contextPath}/CancellaProdottoServlet?id=<%= p.getId() %>">Elimina</a>
             		</div>
         		<% } %>
+        		</td>
+               </tr>
+                 
+                
         	<% } %>
         </table>
         
