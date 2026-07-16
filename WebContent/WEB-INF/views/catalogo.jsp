@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.sunpoint.model.Prodotto" %>
+<%@ page import="it.unisa.sunpoint.model.Utente" %>
 <%
     // Recuperiamo la lista di prodotti che la Servlet ci ha inviato
     List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("catalogo");
+
+	//Recupero l'utente dalla sessione per controllare i permessi
+	Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
 %>
 <!DOCTYPE html>
 <html>
