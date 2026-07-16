@@ -53,11 +53,6 @@
                     <td>€ <%= p.getPrezzo() %></td>
                     <td><%= p.getQuantita() %> pz</td>
                     <td>
-                        <form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST">
-                            <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
-                            <input type="submit" value="Aggiungi al Carrello">
-                        </form>
-                    
                     <% if (utenteLoggato != null && "admin".equals(utenteLoggato.getRole())) { %>
             		<div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #ccc;">
                 		<p>Opzioni Admin:</p>
@@ -69,6 +64,10 @@
                 		<a href="${pageContext.request.contextPath}/CancellaProdottoServlet?id=<%= p.getId() %>">Elimina</a>
             		</div>
         		<% } %>
+        			<form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST">
+                            <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
+                            <input type="submit" value="Aggiungi al Carrello">
+                        </form>
         		</td>
                </tr>
                  
