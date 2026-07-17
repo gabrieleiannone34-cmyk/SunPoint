@@ -3,9 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>Area Admin</title>
 </head>
 <body>
+	<div class="container">
 	<h2>Pannello di Controllo - Aggiungi Occhiale</h2>
 	<p>Inserisci i dettagli del nuovo occhiale da aggiungere al catalogo.</p>
 	
@@ -30,5 +32,6 @@
 
 	<br>
 	<a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
+	</div>
 </body>
 </html>

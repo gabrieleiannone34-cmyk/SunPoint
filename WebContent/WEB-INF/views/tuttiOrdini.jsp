@@ -8,9 +8,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>Gestione Ordini - Area Admin</title>
 </head>
 <body>
+	<div class="container">
     <h2>Pannello di Controllo - Tutti gli Ordini</h2>
     <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
     <br>
@@ -30,7 +32,7 @@
             <a href="${pageContext.request.contextPath}/TuttiOrdiniServlet">Resetta Filtri</a>
         </form>
     </div>
-
+	</div>
     <% if (ordini != null && !ordini.isEmpty()) { %>
         <table>
             <tr>

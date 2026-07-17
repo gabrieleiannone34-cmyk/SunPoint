@@ -8,9 +8,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>Modifica Prodotto</title>
 </head>
 <body>
+	<div class="container">
 	<h2>Pannello di Controllo - Modifica Occhiale</h2>
 	
 	<form action="${pageContext.request.contextPath}/ModificaProdottoServlet" method="POST">
@@ -37,5 +39,6 @@
 
 	<br>
 	<a href="${pageContext.request.contextPath}/CatalogoServlet">Annulla e torna al Catalogo</a>
+	</div>
 </body>
 </html>

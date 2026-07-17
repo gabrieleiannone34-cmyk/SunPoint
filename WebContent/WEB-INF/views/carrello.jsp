@@ -12,9 +12,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>Il tuo Carrello</title>
 </head>
 <body>
+	<div class="container">
 	<h2>Il tuo Carrello</h2>
 	<a href="${pageContext.request.contextPath}/CatalogoServlet">Continua lo shopping</a> | <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
 	
@@ -58,5 +60,6 @@
     <% } else { %>
         <p>Il tuo carrello è vuoto. Torna al catalogo per aggiungere un paio di occhiali!</p>
     <% } %>
+    </div>
 </body>
 </html>

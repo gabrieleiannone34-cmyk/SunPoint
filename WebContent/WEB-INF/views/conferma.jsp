@@ -3,9 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>Ordine Confermato - SunPoint</title>
 </head>
 <body>
+	<div class="container">
 
     <h2>Grazie per il tuo acquisto! </h2>
     <p>Il tuo ordine è stato registrato con successo</p>
@@ -13,6 +15,6 @@
     
     <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a> | 
     <a href="${pageContext.request.contextPath}/CatalogoServlet">Continua lo shopping</a>
-
+	</div>
 </body>
 </html>

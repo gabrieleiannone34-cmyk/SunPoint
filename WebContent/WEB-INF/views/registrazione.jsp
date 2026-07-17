@@ -3,9 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>Registrazione</title>
 </head>
 <body>
+	<div class="container">
 	<h2>Registrazione</h2>
 	
 	<%-- Gli errori vengono stampati qui --%>
@@ -36,5 +38,6 @@
 		
 		<input type="submit" value="Registrati">
 	</form>
+	</div>
 </body>
 </html>

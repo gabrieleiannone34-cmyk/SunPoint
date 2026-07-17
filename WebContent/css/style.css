@@ -1,78 +1,70 @@
-@charset "UTF-8";
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #DDDDDD;
-    color: #111111;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%; 
+    line-height: 1.6; /* Interlinea per migliorare la leggibilità */
+    color: #333333; 
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
-.container {
-    width: 85%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    min-height: 100vh;
-}
+
 h1, h2, h3 {
-    color: #e9b927;
-    border-bottom: 2px solid #ff8080;
-    padding-bottom: 5px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: normal;
+    color: #000000;
 }
-a {
-    color: #2980b9;
-    text-decoration: none;
-    font-weight: bold;
-}
-a:hover {
-    color: #e74c3c;
-    text-decoration: underline;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-table, th, td {
-    border: 1px solid #c0c0c0;
-}
-th {
-    background-color: #000059;
-    color: white;
-    padding: 11px;
-    text-align: left;
+/* ==========================================================================
+   2. STRUTTURA SEMANTICA HTML5 E BOX MODEL
+   ========================================================================== */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto; /* Centratura del blocco */
+    background-color: #ffffff;
+    padding: 20px; 
 }
 
-td {
-    padding: 10px;
-    vertical-align: middle;
+header {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 30px 20px;
+    text-align: center;
+    text-transform: uppercase; 
 }
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+
+footer {
+    background-color: #222222;
+    color: #aaaaaa;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8em; 
+    clear: both; 
 }
-input[type="submit"], button {
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 4px;
+/* ==========================================================================
+   3. MENU DI NAVIGAZIONE (Pseudo-classi e Liste)
+   ========================================================================== */
+nav ul {
+    list-style-type: none; /* Rimuove i pallini dalla lista */
+    padding: 0;
+    margin: 0;
+    background-color: #333333;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block; /* Dispone gli elementi della lista orizzontalmente */
+}
+
+/* Gestione degli stati dei link tramite pseudo-classi */
+nav ul li a:link, nav ul li a:visited {
+    display: block;
+    padding: 15px 25px;
+    color: #ffffff;
+    text-decoration: none; /* Rimuove la sottolineatura di default */
     font-weight: bold;
 }
 
-.esci{
-	background-color: #ff0000;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-weight: bold;
-}
-.esci:hover {
-	background-color: #bf0000;
-}
-input[type="submit"]:hover, button:hover {
-    background-color: #219150;
+nav ul li a:hover {
+    background-color: #555555;
+    color: #ffffff;
 }

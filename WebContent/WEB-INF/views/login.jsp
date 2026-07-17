@@ -3,9 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <title>Login</title>
 </head>
 <body>
+	<div class="container">
 	<h2>Accesso</h2>
 	
 	<%-- Stampa Errori di login (es. email o password errata) --%>
@@ -36,5 +38,6 @@
         <input type="submit" value="Accedi">
     </form>
     <p>Non hai un account? <a href="${pageContext.request.contextPath}/RegistrazioneServlet">Registrati qui</a></p>
+    </div>
 </body>
 </html>
