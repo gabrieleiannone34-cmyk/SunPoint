@@ -17,6 +17,7 @@
     <title>Catalogo Occhiali - SunPoint</title>
 </head>
 <body>
+	<div class="container">
 	<%
     // Se nell'URL c'è scritto "errore=esaurito", mostriamo un avviso
     String errore = request.getParameter("errore");
@@ -82,6 +83,6 @@
     <% } %>
     
    
-
+	</div>
 </body>
 </html>

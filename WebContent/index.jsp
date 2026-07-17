@@ -12,6 +12,7 @@
 <title>Home</title>
 </head>
 <body>
+	<div class="container">
 	<h1>SunPoint</h1>
 	
 	<% if(utenteLoggato != null) { %>
@@ -43,5 +44,6 @@
 		<p>Non sei autenticato. Accedi per acquistare prodotti.</p>
         <a href="${pageContext.request.contextPath}/LoginServlet">Accedi</a> | <a href="${pageContext.request.contextPath}/RegistrazioneServlet">Registrati</a>
     <% } %>
+    </div>
 </body>
 </html>
