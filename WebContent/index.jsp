@@ -38,7 +38,7 @@
             <a href="${pageContext.request.contextPath}/TuttiOrdiniServlet">Visualizza Tutti gli Ordini</a>
         <% } %>
         <br>
-        <a href="${pageContext.request.contextPath}/LogoutServlet"><button>Esci (Logout)</button></a>
+        <a href="${pageContext.request.contextPath}/LogoutServlet"><button class="esci">Esci (Logout)</button></a>
         
 	<% } else { %>
 		<p>Non sei autenticato. Accedi per acquistare prodotti.</p>

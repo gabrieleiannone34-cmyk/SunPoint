@@ -60,3 +60,19 @@ input[type="submit"], button {
     border-radius: 4px;
     font-weight: bold;
 }
+
+.esci{
+	background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.esci:hover {
+	background-color: #bf0000;
+}
+input[type="submit"]:hover, button:hover {
+    background-color: #219150;
+}
