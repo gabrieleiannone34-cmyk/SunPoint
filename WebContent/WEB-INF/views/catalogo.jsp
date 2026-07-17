@@ -13,6 +13,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <title>Catalogo Occhiali - SunPoint</title>
 </head>
 <body>
