@@ -9,7 +9,6 @@
 <head>
     <meta charset="UTF-8">
     <title>SunPoint - Home</title>
-    <!-- Collegamento al nuovo CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
