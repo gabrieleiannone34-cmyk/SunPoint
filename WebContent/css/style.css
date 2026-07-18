@@ -68,3 +68,44 @@ nav ul li a:hover {
     background-color: #555555;
     color: #ffffff;
 }
+
+/* ==========================================================================
+   4. LAYOUT DEL CATALOGO (Fluid Layout con Float)
+   ========================================================================== */
+.catalogo-grid {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    overflow: hidden; /* Trucco per far sì che il contenitore "avvolga" gli elementi float interni */
+}
+
+.prodotto-card {
+    float: left; /* Estrae l'elemento dal flusso normale e lo allinea a sinistra */
+    width: 30%;  /* Tre colonne per riga */
+    margin: 0 1.5% 30px 1.5%; /* Margini percentuali per la fluidità */
+    padding: 15px;
+    border: 1px solid #e0e0e0; /* Shorthand property per il bordo */
+    text-align: center;
+    background-color: #ffffff;
+    box-sizing: border-box; 
+}
+
+/* Immagini fluide: si adattano alla larghezza del contenitore padre */
+.prodotto-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.prodotto-titolo {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.prodotto-prezzo {
+    font-size: 1.4em;
+    color: #cc0000;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+   
