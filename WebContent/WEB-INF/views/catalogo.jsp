@@ -4,7 +4,7 @@
 <%@ page import="it.unisa.sunpoint.model.Utente" %>
 <%
     // Recupero della lista inviata dalla CatalogoServlet
-    List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("prodotti");
+    List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("catalogo");
     
     // Recupero dell'utente per i controlli Admin
     Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
@@ -38,8 +38,8 @@
                         <div class="prodotto-prezzo">€ <%= p.getPrezzo() %></div>
                         
                         <%-- FORM PER AGGIUNGERE AL CARRELLO --%>
-                        <form action="${pageContext.request.contextPath}/AggiungiCarrelloServlet" method="POST">
-                            <input type="hidden" name="id" value="<%= p.getId() %>">
+                        <form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST">
+                            <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
                             <button type="submit" class="btn-carrello">Aggiungi al Carrello</button>
                         </form>
 

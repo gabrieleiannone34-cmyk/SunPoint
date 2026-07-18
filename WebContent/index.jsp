@@ -23,7 +23,7 @@
             <div style="background-color: #f9f9f9; padding: 20px; border-left: 4px solid #000; margin-top: 30px;">
                 <h3>Pannello di Controllo Admin</h3>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/inserisciProdotto.jsp">Inserisci un Nuovo Occhiale nel Catalogo</a></li>
+                    <li><a href="${pageContext.request.contextPath}/InserisciProdottoServlet">Inserisci un Nuovo Occhiale nel Catalogo</a></li>
                     <li><a href="${pageContext.request.contextPath}/TuttiOrdiniServlet">Visualizza e Filtra Tutti gli Ordini</a></li>
                 </ul>
             </div>
