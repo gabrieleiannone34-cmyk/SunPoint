@@ -188,7 +188,8 @@ tr:nth-child(even) {
         border-bottom: 1px solid #444444;
     }
 }
-.emailstyle{
+.regstyle{
+	color: #ff0000;
 	font-weight: bold;
 	margin-left: 10px;
 	font-size: 0.9em;
