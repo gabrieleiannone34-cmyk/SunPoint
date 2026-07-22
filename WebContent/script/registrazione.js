@@ -85,3 +85,19 @@ function checkEmail() {
     
     loadAjaxDoc(url, "GET", params, handleEmailResponse);
 }
+function validaPassword() {
+    var password = document.getElementById("password").value;
+    var spanError = document.getElementById("passwordError");
+    
+    // REGEX: Minimo 8 caratteri, almeno una lettera e almeno un numero
+    var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+        // Manipolazione del DOM: niente alert!
+        spanError.innerHTML = "La password deve essere di almeno 8 caratteri e contenere almeno un numero e una lettera.";
+        return false; // Validazione fallita
+    } else {
+        spanError.innerHTML = ""; // Puliamo l'errore se è corretto
+        return true;  // Validazione passata
+    }
+}
