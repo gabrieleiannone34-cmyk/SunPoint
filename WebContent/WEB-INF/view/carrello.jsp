@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 <title>Il tuo Carrello</title>
 </head>
 <body>
@@ -38,6 +38,17 @@
                 <tr>
                     <td><%= p.getNome() %></td>
                     <td>€ <%= p.getPrezzo() %></td>
+                    <td><form action="<%= request.getContextPath() %>/CarrelloServlet" method="POST" style="display: inline-block;">
+                            <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
+                            <button type="submit" name="azione" value="diminuisci" class="btn-quantita">-</button>
+                            
+                            <%-- NOTA: Poiché il tuo carrello è un semplice List<Prodotto>, metto "1" come test visivo --%>
+                            <input type="text" value="1" readonly class="input-quantita">
+                            
+                            <button type="submit" name="azione" value="aumenta" class="btn-quantita">+</button>
+                        </form>
+                    </td>
+                    
                     <td><form action="<%= request.getContextPath() %>/RimuoviCarrelloServlet" method="POST">
                     	<input type="hidden" name="idProdotto" value="<%= p.getId() %>">
                     		<button type="submit">Rimuovi</button>

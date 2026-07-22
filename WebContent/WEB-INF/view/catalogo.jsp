@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Catalogo - SunPoint</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
 <body>
     <div class="container">
