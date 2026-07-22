@@ -6,7 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+
+import org.json.JSONObject;
 
 import it.unisa.sunpoint.dao.UtenteDAO;
 
@@ -17,30 +20,30 @@ public class VerificaEmailServlet extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Catturiamo l'email digitata dall'utente
-		String email = request.getParameter("email");
-		
-		// Diciamo al browser che risponderemo con del semplice testo (non una pagina HTML intera!)
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
-		
-		if(email != null && !email.trim().isEmpty()) {
-			UtenteDAO utenteDAO = new UtenteDAO();
-			try {
-				boolean esiste = utenteDAO.checkEmailExists(email);
-			
-				// Rispondiamo in modo asincrono con una semplice parola chiave
-				if (esiste) {
-					response.getWriter().write("occupata");
-				} else {
-					response.getWriter().write("disponibile");
-				}
-				
-			} catch (SQLException e) {
-				response.getWriter().write("errore");
-			}
-		}
-	}
+		response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        
+        String email = request.getParameter("email");
+        String risultato = "disponibile"; // default
+
+        if (email != null && !email.trim().isEmpty()) {
+            UtenteDAO utenteDAO = new UtenteDAO();
+            try {
+                boolean esiste = utenteDAO.checkEmailExists(email);
+                if (esiste) {
+                    risultato = "occupata";
+                }
+            } catch (SQLException e) {
+                risultato = "errore";
+            }
+        }
+
+        // 2. Creiamo l'oggetto JSON e lo stampiamo
+        JSONObject json = new JSONObject();
+        json.put("result", risultato);
+        out.print(json.toString());
+    }
+
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
