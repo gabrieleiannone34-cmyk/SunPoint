@@ -94,6 +94,33 @@ public class UtenteDAO {
         }
         return utente;
 	}
+	// Metodo per AJAX: Controlla se un'email è già registrata
+	public synchronized boolean checkEmailExists(String email) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		boolean exists = false;
+		
+		try {
+				connection = ds.getConnection();
+				String query = "SELECT email FROM Utenti WHERE email = ?";
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setString(1, email);
+				
+				rs = preparedStatement.executeQuery();
+				
+				// Se il ResultSet ha almeno una riga, l'email è già nel DB
+				if(rs.next()) {
+					exists = true;
+				}
+		} finally {
+			if(rs != null) rs.close();
+			if (preparedStatement != null) preparedStatement.close();
+			if (connection != null) connection.close();
+		}
+		return exists;
+	}
+	
 	
 }
 
