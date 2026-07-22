@@ -25,9 +25,9 @@
 		<input type="text" id="cognome" name="cognome" required><br>
 		
 		<label for="email">Email:</label><br>
-		<input type="email" id="email" name="email" required><br>
+		<input type="email" id="email" name="email" onkeyup="checkEmail()" required><br>
 		<span id="emailMessage" class="emailstyle"></span>
-		
+		<br>
 		<label for="password">Password:</label><br>
 		<input type="password" id="password" name="password" required><br>
 		
