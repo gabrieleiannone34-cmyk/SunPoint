@@ -17,7 +17,7 @@
 	%>
 		<p> ERRORE: <%= errore %></p>
 	<% } %>
-	<form action="${pageContext.request.contextPath}/RegistrazioneServlet" method="POST" onsubmit="return validaFormRegistrazione()">
+	<form id="formRegistrazione"action="${pageContext.request.contextPath}/RegistrazioneServlet" method="POST" onsubmit="return validaFormRegistrazione()">
 		<label for="nome">Nome:</label><br>
 		<input type="text" id="nome" name="nome" required><br>
 		
@@ -26,10 +26,10 @@
 		
 		<label for="email">Email:</label><br>
 		<input type="email" id="email" name="email" onkeyup="checkEmail()" required><br>
-		<span id="emailMessage" class="emailstyle"></span>
+		<span id="emailMessage" class="regstyle"></span>
 		<br>
 		<label for="password">Password:</label><br>
-		<input type="password" id="password" name="password" onchange="validaPassword()" required><br>
+		<input type="password" id="password" name="password" onchange="validateFormElem(this, passwordPattern, document.getElementById('passwordError'), passwordErrorMessage)" required><br>
 		<span id="passwordError" class="regstyle"></span>
 		
 		<label for="indirizzo">Indirizzo:</label><br>

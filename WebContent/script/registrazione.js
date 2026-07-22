@@ -1,4 +1,7 @@
-// 1. Inizializzazione compatibile
+/* ========================================================
+   PARTE 1: MOTORE AJAX (Controllo Email Asincrono)
+   ======================================================== */
+
 function createXMLHttpRequest() {
     var request;
     try {
@@ -18,7 +21,6 @@ function createXMLHttpRequest() {
     return request;
 }
 
-// 2. La funzione "core" riutilizzabile del prof
 function loadAjaxDoc(url, method, params, cFunction) {
     var request = createXMLHttpRequest();
     if (request) {
@@ -28,7 +30,7 @@ function loadAjaxDoc(url, method, params, cFunction) {
                     cFunction(this);
                 } else {
                     if (this.status == 0) {
-                        alert("Problemi nell'esecuzione della richiesta: nessuna risposta ricevuta nel tempo limite");
+                        alert("Problemi nell'esecuzione della richiesta: timeout");
                     } else {
                         alert("Problemi nell'esecuzione della richiesta:\n" + this.statusText);
                     }
@@ -55,7 +57,6 @@ function loadAjaxDoc(url, method, params, cFunction) {
     }
 }
 
-// 3. La Funzione di Callback
 function handleEmailResponse(request) {
     var response = JSON.parse(request.responseText);
     var messageSpan = document.getElementById("emailMessage");
@@ -69,7 +70,6 @@ function handleEmailResponse(request) {
     }
 }
 
-// 4. La funzione legata all'evento
 function checkEmail() {
     var emailInput = document.getElementById("email").value;
     var messageSpan = document.getElementById("emailMessage");
@@ -79,25 +79,48 @@ function checkEmail() {
         return;
     }
 
-    // MODIFICA CRUCIALE: Usiamo la variabile globale contextPath invece di JSP
     var url = contextPath + "/VerificaEmailServlet";
     var params = "email=" + encodeURIComponent(emailInput);
     
     loadAjaxDoc(url, "GET", params, handleEmailResponse);
 }
-function validaPassword() {
-    var password = document.getElementById("password").value;
-    var spanError = document.getElementById("passwordError");
-    
-    // REGEX: Minimo 8 caratteri, almeno una lettera e almeno un numero
-    var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    if (!passwordRegex.test(password)) {
-        // Manipolazione del DOM: niente alert!
-        spanError.innerHTML = "La password deve essere di almeno 8 caratteri e contenere almeno un numero e una lettera.";
-        return false; // Validazione fallita
+
+/* ========================================================
+   PARTE 2: VALIDAZIONE FORM (Stile del Professore)
+   ======================================================== */
+
+// 1. Costanti con le Regex 
+const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+// 2. Costanti con i messaggi di errore
+const passwordErrorMessage = "La password deve essere di almeno 8 caratteri con lettere e numeri.";
+
+// 3. La funzione generica del Professore per colorare i campi
+function validateFormElem(formElem, pattern, span, message) {
+    if (formElem.value.match(pattern)) {
+        formElem.classList.remove("error");
+        span.style.color = "black";
+        span.innerHTML = "";
+        return true;
     } else {
-        spanError.innerHTML = ""; // Puliamo l'errore se è corretto
-        return true;  // Validazione passata
+        formElem.classList.add("error");
+        span.innerHTML = message;
+        span.style.color = "red";
+        return false;
     }
+}
+
+// 4. Controllo finale quando si preme "Registrati"
+function validateRegistrazione() {
+    let valid = true;
+    let form = document.getElementById("formRegistrazione");
+
+    // Validazione Password
+    let spanPassword = document.getElementById("passwordError");
+    if (!validateFormElem(form.password, passwordPattern, spanPassword, passwordErrorMessage)) {
+        valid = false;
+    }
+
+    return valid;
 }
