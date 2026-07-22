@@ -52,7 +52,7 @@ public class TuttiOrdiniServlet extends HttpServlet {
 			}
 			
 			request.setAttribute("tuttiOrdini", ordini);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/tuttiOrdini.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/tuttiOrdini.jsp");
 			dispatcher.forward(request, response);
 
 		} catch (SQLException e) {

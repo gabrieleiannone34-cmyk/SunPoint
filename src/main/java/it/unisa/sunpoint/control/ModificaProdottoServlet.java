@@ -40,7 +40,7 @@ public class ModificaProdottoServlet extends HttpServlet {
 			// Passiamo il prodotto alla pagina JSP in modo che possa pre-compilare i campi
 			request.setAttribute("prodottoDaModificare", prodotto);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/modificaProdotto.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/modificaProdotto.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();

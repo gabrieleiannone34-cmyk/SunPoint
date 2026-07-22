@@ -29,7 +29,7 @@ public class CatalogoServlet extends HttpServlet {
             request.setAttribute("catalogo", listaProdotti);
             
          // 3. Passiamo alla JSP nascosta
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/catalogo.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/catalogo.jsp");
             dispatcher.forward(request, response);
 		} catch(SQLException e) {
 			e.printStackTrace();

@@ -33,7 +33,7 @@ public class InserisciProdottoServlet extends HttpServlet {
 		}
 		
 		// Se sei admin, ti apro la porta del form nascosto
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/inserisciProdotto.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/inserisciProdotto.jsp");
 		dispatcher.forward(request, response);
 	}
 

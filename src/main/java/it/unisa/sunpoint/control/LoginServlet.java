@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
        
 	// Mostra la pagina di login (nascosta nella cartella WEB-INF)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
         dispatcher.forward(request, response);
 	}
 
@@ -64,13 +64,13 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			// Login fallito
 			request.setAttribute("errore", "Email o password non validi. Riprova.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
 			dispatcher.forward(request, response);
 		}
 	} catch(SQLException e) {
 		e.printStackTrace();
 		request.setAttribute("errore", "Errore di connessione al database.");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
         dispatcher.forward(request, response);
 			
 		}

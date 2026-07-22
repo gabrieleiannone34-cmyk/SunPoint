@@ -16,7 +16,7 @@ public class VisualizzaCarrelloServlet extends HttpServlet {
     // Usiamo doGet perché l'utente vuole solo VEDERE la pagina
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/carrello.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/carrello.jsp");
         dispatcher.forward(request, response);
     }
 

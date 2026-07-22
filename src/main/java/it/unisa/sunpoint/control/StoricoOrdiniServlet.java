@@ -41,7 +41,7 @@ public class StoricoOrdiniServlet extends HttpServlet {
 			request.setAttribute("storicoOrdini", storicoOrdini);
 			
 			// 4. Apriamo la porta della JSP nascosta
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/ordini.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/ordini.jsp");
 			dispatcher.forward(request, response);
 			
 		} catch (SQLException e) {

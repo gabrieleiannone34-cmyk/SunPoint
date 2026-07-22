@@ -21,7 +21,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Se qualcuno prova ad accedere alla servlet via URL diretto, lo rimandiamo al form
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
 	    dispatcher.forward(request, response);
 	}
 
@@ -61,7 +61,7 @@ public class RegistrazioneServlet extends HttpServlet {
             request.setAttribute("errore", "Errore durante la registrazione. L'email potrebbe essere già in uso.");
             
          // Rimandiamo indietro l'utente alla pagina di registrazione mostrando l'errore
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
             dispatcher.forward(request, response);
 		}
 		
