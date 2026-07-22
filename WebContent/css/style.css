@@ -108,4 +108,89 @@ nav ul li a:hover {
     font-weight: bold;
     margin-bottom: 20px;
 }
+/* ==========================================================================
+   5. BOTTONI E FORM
+   ========================================================================== */
+.btn-carrello, input[type="submit"] {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 12px 0;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn-carrello:hover, input[type="submit"]:hover {
+    background-color: #444444; /* Feedback visivo al passaggio del mouse */
+}
+
+input[type="text"], input[type="number"], input[type="date"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   6. TABELLE (Carrello e Ordini)
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Unisce i bordi adiacenti delle celle in una singola linea */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #cccccc;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #000000;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+/* Pseudo-classe strutturale per le righe alternate (Zebra-striping) */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+/* ==========================================================================
+   7. MEDIA QUERIES (Adaptive Layout / Breakpoints)
+   ========================================================================== */
+
+/* Layout Tablet: si passa da 3 colonne a 2 colonne */
+@media screen and (max-width: 980px) {
+    .prodotto-card {
+        width: 46%; /* Dimensionamento per 2 elementi per riga */
+        margin: 0 2% 20px 2%;
+    }
+}
+
+/* Layout Smartphone: colonna singola e menu verticale */
+@media screen and (max-width: 540px) {
+    .prodotto-card {
+        width: 96%; /* Occupa quasi tutto lo schermo */
+        margin: 0 2% 20px 2%;
+        float: none; /* Annulla il float per ripristinare il normale flusso a blocchi */
+    }
+    
+    nav ul li {
+        display: block; /* Il menu orizzontale diventa verticale */
+    }
+    
+    nav ul li a:link, nav ul li a:visited {
+        border-bottom: 1px solid #444444;
+    }
+}
+.emailstyle{
+	font-weight: bold;
+	margin-left: 10px;
+	font-size: 0.9em;
+}
    
