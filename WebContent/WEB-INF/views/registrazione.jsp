@@ -40,5 +40,97 @@
 		<input type="submit" value="Registrati">
 	</form>
 	</div>
+	<script>
+    // 1. Inizializzazione compatibile (Esattamente come nelle slide)
+    function createXMLHttpRequest() {
+        var request;
+        try {
+            request = new XMLHttpRequest();
+        } catch (e) {
+            try {
+                request = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    request = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {
+                    alert("Il browser non supporta AJAX");
+                    return null;
+                }
+            }
+        }
+        return request;
+    }
+
+    // 2. La funzione "core" riutilizzabile del prof
+    function loadAjaxDoc(url, method, params, cFunction) {
+        var request = createXMLHttpRequest();
+        if (request) {
+            request.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        cFunction(this);
+                    } else {
+                        if (this.status == 0) { // Timeout o abort()
+                            alert("Problemi nell'esecuzione della richiesta: nessuna risposta ricevuta nel tempo limite");
+                        } else {
+                            alert("Problemi nell'esecuzione della richiesta:\n" + this.statusText);
+                        }
+                        return null;
+                    }
+                }
+            };
+
+            // Timeout di 15 secondi come da direttive
+            setTimeout(function () {
+                if (request.readyState < 4) {
+                    request.abort();
+                }
+            }, 15000);
+
+            // Costruzione e invio richiesta
+            if (method.toLowerCase() == "get") {
+                if (params) {
+                    request.open("GET", url + "?" + params, true);
+                } else {
+                    request.open("GET", url, true);
+                }
+                request.setRequestHeader("Connection", "close");
+                request.send(null);
+            }
+        }
+    }
+
+    // 3. La Funzione di Callback (Elaborazione JSON)
+    function handleEmailResponse(request) {
+        // Parsing della stringa JSON restituita dalla Servlet
+        var response = JSON.parse(request.responseText);
+        var messageSpan = document.getElementById("emailMessage");
+
+        if (response.result === "occupata") {
+            messageSpan.style.color = "#d9534f";
+            messageSpan.innerHTML = "Attenzione: Email già in uso!";
+        } else if (response.result === "disponibile") {
+            messageSpan.style.color = "#5cb85c";
+            messageSpan.innerHTML = "Email disponibile";
+        }
+    }
+
+    // 4. La funzione legata all'evento onkeyup sull'input
+    function checkEmail() {
+        var emailInput = document.getElementById("email").value;
+        var messageSpan = document.getElementById("emailMessage");
+
+        if (emailInput.length === 0) {
+            messageSpan.innerHTML = "";
+            return;
+        }
+
+        var url = "${pageContext.request.contextPath}/VerificaEmailServlet";
+        var params = "email=" + encodeURIComponent(emailInput);
+        
+        // Chiamata alla funzione generica
+        loadAjaxDoc(url, "GET", params, handleEmailResponse);
+    }
+</script>
 </body>
 </html>
