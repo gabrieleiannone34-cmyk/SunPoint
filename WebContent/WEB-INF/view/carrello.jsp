@@ -44,7 +44,7 @@
                     <td><form action="<%= request.getContextPath() %>/GestioneCarrelloServlet" method="POST" style="display: inline-block;">
                             <input type="hidden" name="idProdotto" value="<%= item.getProdotto().getId() %>">
                             <button type="submit" name="azione" value="diminuisci" class="btn-quantita">-</button>  
-                            <input type="text" value="<%= "item.getQuantita()" %>" readonly class="input-quantita">
+                            <input type="text" value="<%= item.getQuantita() %>" readonly class="input-quantita">
                             <button type="submit" name="azione" value="aumenta" class="btn-quantita">+</button>
                         </form>
                     </td>

@@ -63,6 +63,6 @@ public class GestioneCarrelloServlet extends HttpServlet {
 			session.setAttribute("carrello", carrello);
 		}
 
-		response.sendRedirect(request.getContextPath() + "/view/carrello.jsp");
+		response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
 	}
 }

@@ -65,7 +65,7 @@ public class CarrelloServlet extends HttpServlet {
                 		carrello.add(new ItemCarrello(occhialeScelto, 1)); // Altrimenti creiamo un nuovo elemento con quantità 1
                 	}
                         session.setAttribute("carrello", carrello);
-                        response.sendRedirect(request.getContextPath() + "/view/carrello.jsp");
+                        response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
                         return;
                 } else {
                 	response.sendRedirect(request.getContextPath() + "/CatalogoServlet?errore=esaurito");

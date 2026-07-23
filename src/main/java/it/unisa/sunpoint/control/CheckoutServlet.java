@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import it.unisa.sunpoint.model.ItemCarrello;
 import it.unisa.sunpoint.model.Ordine;
 import it.unisa.sunpoint.model.Prodotto;
 import it.unisa.sunpoint.model.Utente;
@@ -29,7 +30,7 @@ public class CheckoutServlet extends HttpServlet {
 		
 		// Recuperiamo l'utente loggato e il carrello della sessione
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
-		List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
+		List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
 		
 		// 2. Controlli di sicurezza: l'utente deve essere loggato e il carrello non deve essere vuoto
 		if (utente == null) {
@@ -44,8 +45,8 @@ public class CheckoutServlet extends HttpServlet {
         
         // 3. Calcoliamo il totale dei prodotti nel carrello
         double totaleDaPagare = 0.0;
-        for (Prodotto p : carrello) {
-            totaleDaPagare += p.getPrezzo();
+        for (ItemCarrello item : carrello) {
+            totaleDaPagare += item.getProdotto().getPrezzo();
         }
         
         // 4. Prepariamo lo "scontrino" (il JavaBean Ordine)
@@ -67,8 +68,8 @@ public class CheckoutServlet extends HttpServlet {
             
             //Scaliamo i pezzi dal magazzino 
             ProdottoDAO prodottoDAO = new ProdottoDAO();
-            for (Prodotto p : carrello) {
-                prodottoDAO.aggiornaQuantita(p.getId());
+            for (ItemCarrello item : carrello) {
+                prodottoDAO.aggiornaQuantita(item.getProdotto().getId());
             }
             
             // Visto che ha pagato, dobbiamo svuotare anche il carrello salvato nel Database

@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import it.unisa.sunpoint.model.ItemCarrello;
 import it.unisa.sunpoint.model.Prodotto;
 
 @WebServlet("/RimuoviCarrelloServlet")
@@ -30,21 +31,19 @@ public class RimuoviCarrelloServlet extends HttpServlet {
             
          // 2. Apriamo la sessione e prendiamo il carrello
          HttpSession session = request.getSession();
-         List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
+         List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
         
-         // 3. Cerchiamo il prodotto nel carrello e lo eliminiamo
          if (carrello != null) {
-             // Usiamo un classico ciclo for per scorrere la lista
              for (int i = 0; i < carrello.size(); i++) {
-                 // Se l'ID dell'occhiale nella lista coincide con quello da rimuovere...
-                 if (carrello.get(i).getId() == idProdotto) {
-                     carrello.remove(i); // Lo rimuoviamo!
-                     break; // INTERROMPIAMO IL CICLO: ne togliamo solo UNO alla volta (nel caso ce ne siano due uguali)
+                 // 2. Dobbiamo usare getProdotto().getId() per trovare l'occhiale
+                 if (carrello.get(i).getProdotto().getId() == idProdotto) {
+                     carrello.remove(i);
+                     break;
                  }
              }
-             // 4. Rimettiamo il carrello aggiornato nella sessione
              session.setAttribute("carrello", carrello);
          }
+            
       }
      // 5. Ricarichiamo la pagina del carrello, che ora mostrerà un occhiale in meno!
         response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
