@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import it.unisa.sunpoint.model.ItemCarrello;
 import it.unisa.sunpoint.model.Prodotto;
 import it.unisa.sunpoint.model.Utente;
 import it.unisa.sunpoint.dao.CarrelloDAO;
@@ -46,18 +47,18 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("utenteLoggato", utente);
 			
 			CarrelloDAO carrelloDAO = new CarrelloDAO();
-            try {
-                // Chiediamo al database di ridarci la lista degli occhiali di questo utente
-                List<Prodotto> carrelloSalvato = carrelloDAO.caricaCarrello(utente.getId());
-                
-                // Mettiamo la lista recuperata nella sessione!
-                session.setAttribute("carrello", carrelloSalvato);
-                
-            } catch (SQLException e) {
-                System.out.println("Errore caricamento carrello al login: " + e.getMessage());
-                // Se c'è un errore, creiamo almeno un carrello vuoto per non far crashare il sito
-                session.setAttribute("carrello", new ArrayList<Prodotto>());
-            }
+			try {
+			    // 1. Ora ci aspettiamo una lista di ItemCarrello, non più di Prodotto!
+			    List<ItemCarrello> carrelloSalvato = carrelloDAO.caricaCarrello(utente.getId());
+			    
+			    // Mettiamo la lista recuperata nella sessione
+			    session.setAttribute("carrello", carrelloSalvato);
+			    
+			} catch (SQLException e) {
+			    System.out.println("Errore caricamento carrello al login: " + e.getMessage());
+			    // 2. Se c'è un errore, creiamo una lista vuota di ItemCarrello (NON di Prodotto!)
+			    session.setAttribute("carrello", new ArrayList<ItemCarrello>());
+			}
 			
 			// Reindirizziamo l'utente alla home page
 			response.sendRedirect(request.getContextPath() + "/index.jsp");

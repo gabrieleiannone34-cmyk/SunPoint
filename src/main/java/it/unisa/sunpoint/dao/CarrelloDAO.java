@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import it.unisa.sunpoint.model.ItemCarrello;
 import it.unisa.sunpoint.model.Prodotto;
 
 public class CarrelloDAO {
@@ -74,36 +75,39 @@ public class CarrelloDAO {
     }
 
     // 3. Recupera il carrello da MySQL e lo ritrasforma in List<Prodotto> al Login
-    public synchronized List<Prodotto> caricaCarrello(int userId) throws SQLException {
-        List<Prodotto> carrelloSalvato = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-
-        String selectSQL = "SELECT prodotto_id FROM ElementiCarrello WHERE user_id = ?";
-
-        try {
-            connection = ds.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
-            preparedStatement.setInt(1, userId);
-            rs = preparedStatement.executeQuery();
-
-            ProdottoDAO prodottoDAO = new ProdottoDAO();
-
-            // Per ogni ID prodotto trovato nel database...
-            while (rs.next()) {
-            	int productId = rs.getInt("prodotto_id");
-                
-                // ...usiamo il ProdottoDAO per recuperare tutte le info (nome, prezzo, ecc.)
-                Prodotto p = prodottoDAO.doRetrieveById(productId); 
-                if (p != null) {
-                    carrelloSalvato.add(p);
+    public List<ItemCarrello> caricaCarrello(int idUtente) throws SQLException {
+        List<ItemCarrello> carrelloSalvato = new ArrayList<>();
+        
+        // Facciamo una JOIN tra il carrello salvato e i prodotti per prendere tutti i dati
+        String query = "SELECT p.*, ec.quantita " +
+                       "FROM ElementiCarrello ec " +
+                       "JOIN Prodotti p ON ec.prodotto_id = p.id " +
+                       "WHERE ec.utente_id = ?";
+                       
+        try (Connection con = ds.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+             
+            ps.setInt(1, idUtente);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    // 1. Ricostruiamo l'oggetto Prodotto
+                    Prodotto p = new Prodotto();
+                    p.setId(rs.getInt("id"));
+                    p.setNome(rs.getString("nome"));
+                    p.setPrezzo(rs.getDouble("prezzo"));
+                    // (Setta anche gli altri campi come descrizione e image_path se ti servono)
+                    
+                    // 2. Recuperiamo la quantità che l'utente aveva lasciato nel carrello
+                    int quantita = rs.getInt("quantita");
+                    
+                    // 3. Creiamo l'ItemCarrello unendo il prodotto e la sua quantità
+                    ItemCarrello item = new ItemCarrello(p, quantita);
+                    
+                    // 4. Lo aggiungiamo alla lista
+                    carrelloSalvato.add(item);
                 }
             }
-        } finally {
-            if (rs != null) rs.close();
-            if (preparedStatement != null) preparedStatement.close();
-            if (connection != null) connection.close();
         }
         return carrelloSalvato;
     }
