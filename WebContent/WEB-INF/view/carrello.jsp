@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="it.unisa.sunpoint.model.Prodotto" %>
+<%@ page import="it.unisa.sunpoint.model.ItemCarrello" %>
 <%
 	//1. Apriamo il cassetto della sessione per prendere la lista degli occhiali
-	List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
+	List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
 
 	// 2. Prepariamo una variabile per sommare i prezzi
 	double totale = 0.0;
@@ -27,30 +27,32 @@
 			<tr>
 				<th>Modello Occhiali</th>
 				<th>Prezzo</th>
+				<th>Quantità</th>
+                <th>Totale Riga</th>
+                <th>Azioni</th>
 			</tr>
 				
 			<%-- Scorriamo gli occhiali nel carrello uno per uno --%>
-            <% for(Prodotto p : carrello) { 
-                // Aggiorniamo la somma totale
-                totale += p.getPrezzo();
+            <% for(ItemCarrello item : carrello) { 
+            	double subtotale = item.getProdotto().getPrezzo() * item.getQuantita();
+                totale += subtotale;
             %>
                 <%-- Riga per il singolo prodotto --%>
                 <tr>
-                    <td><%= p.getNome() %></td>
-                    <td>€ <%= p.getPrezzo() %></td>
-                    <td><form action="<%= request.getContextPath() %>/CarrelloServlet" method="POST" style="display: inline-block;">
+                    <td><%= item.getProdotto().getNome() %></td>
+                    <td>€ <%= item.getProdotto().getPrezzo() %></td>
+                    <td><form action="<%= request.getContextPath() %>/GestioneCarrelloServlet" method="POST" style="display: inline-block;">
                             <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
-                            <button type="submit" name="azione" value="diminuisci" class="btn-quantita">-</button>
-                            
-                            <%-- NOTA: Poiché il tuo carrello è un semplice List<Prodotto>, metto "1" come test visivo --%>
-                            <input type="text" value="1" readonly class="input-quantita">
-                            
+                            <button type="submit" name="azione" value="diminuisci" class="btn-quantita">-</button>  
+                            <input type="text" value="<%= "item.getQuantita()" %>" readonly class="input-quantita">
                             <button type="submit" name="azione" value="aumenta" class="btn-quantita">+</button>
                         </form>
                     </td>
                     
+                    <td>€ <%= String.format("%.2f", subtotale) %></td>
+                    
                     <td><form action="<%= request.getContextPath() %>/RimuoviCarrelloServlet" method="POST">
-                    	<input type="hidden" name="idProdotto" value="<%= p.getId() %>">
+                    	<input type="hidden" name="idProdotto" value="<%= item.getProdotto().getId() %>">
                     		<button type="submit">Rimuovi</button>
                     	</form> 
                    	</td>

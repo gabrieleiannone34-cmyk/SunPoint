@@ -8,9 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import it.unisa.sunpoint.dao.ProdottoDAO;
+import it.unisa.sunpoint.model.ItemCarrello;
 import it.unisa.sunpoint.model.Prodotto;
 
 
@@ -28,52 +30,39 @@ public class GestioneCarrelloServlet extends HttpServlet {
 		String azione = request.getParameter("azione");
 		int idProdotto = Integer.parseInt(request.getParameter("idProdotto"));
 
-		// 2. Recuperiamo il carrello dalla Sessione dell'utente
 		HttpSession session = request.getSession();
-		List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
+		List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
 
 		if (carrello != null) {
 			ProdottoDAO prodottoDAO = new ProdottoDAO();
 			
-			// 3. Logica di variazione quantità
-			if ("aumenta".equals(azione)) {
-				try {
-					// Verifichiamo quanti pezzi di questo prodotto ci sono già nel carrello
-					int pezziGiaNelCarrello = 0;
-					Prodotto prodottoTrovato = null;
+			for (int i = 0; i < carrello.size(); i++) {
+				ItemCarrello item = carrello.get(i);
+				if (item.getProdotto().getId() == idProdotto) {
 					
-					for (Prodotto item : carrello) {
-						if (item.getId() == idProdotto) {
-							pezziGiaNelCarrello++;
-							prodottoTrovato = item;
+					if ("aumenta".equals(azione)) {
+						try {
+							Prodotto occhialeDb = prodottoDAO.doRetrieveById(idProdotto);
+							if (occhialeDb != null && item.getQuantita() < occhialeDb.getQuantita()) {
+								item.incrementaQuantita();
+							}
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					} 
+					else if ("diminuisci".equals(azione)) {
+						if (item.getQuantita() > 1) {
+							item.decrementaQuantita();
+						} else {
+							carrello.remove(i); // Se la quantità arriva a 0, rimuoviamo l'articolo dalla lista
 						}
 					}
-					
-					// Controlliamo le scorte nel database prima di aggiungere
-					Prodotto occhialeDb = prodottoDAO.doRetrieveById(idProdotto);
-					if (occhialeDb != null && pezziGiaNelCarrello < occhialeDb.getQuantita() && prodottoTrovato != null) {
-						// Aggiungiamo un clone/istanza dello stesso prodotto alla lista
-						carrello.add(prodottoTrovato);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-			} else if ("diminuisci".equals(azione)) {
-				// Rimuoviamo il primo prodotto trovato con quell'ID dalla lista
-				for (int i = 0; i < carrello.size(); i++) {
-					if (carrello.get(i).getId() == idProdotto) {
-						carrello.remove(i);
-						break; // Ne rimuoviamo solo uno per volta
-					}
+					break;
 				}
 			}
-			
-			// Aggiorniamo il carrello nella sessione
 			session.setAttribute("carrello", carrello);
 		}
 
-		// 4. Ricarichiamo la pagina del carrello
 		response.sendRedirect(request.getContextPath() + "/view/carrello.jsp");
 	}
 }
