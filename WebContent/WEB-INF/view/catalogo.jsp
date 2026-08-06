@@ -34,7 +34,7 @@
                         <img src="images/<%= p.getImagePath() %>" alt="<%= p.getNome() %>" class="prodotto-img">
                         
                         <div class="prodotto-titolo"><%= p.getNome() %></div>
-                        <div class="prodotto-descrizione"><%= p.getDescrizione() %></div>
+                        <div class="descrizione-occhiale"><%= p.getDescrizione() %></div>
                         <div class="prodotto-prezzo">€ <%= p.getPrezzo() %></div>
                         
                         <%-- FORM PER AGGIUNGERE AL CARRELLO --%>

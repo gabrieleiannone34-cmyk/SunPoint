@@ -108,6 +108,15 @@ nav ul li a:hover {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
+.descrizione-occhiale {
+    height: 120px; /* Spazio fisso per il testo */
+    overflow-y: auto; /* Se sfora, appare la barra */
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    padding-right: 5px;
+}
+
 /* ==========================================================================
    5. BOTTONI E FORM
    ========================================================================== */
