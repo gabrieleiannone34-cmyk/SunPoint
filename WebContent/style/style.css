@@ -92,7 +92,8 @@ nav ul li a:hover {
 /* Immagini fluide: si adattano alla larghezza del contenitore padre */
 .prodotto-img {
     max-width: 100%;
-    height: auto;
+    height: 200px;
+    object-fit: contain; /* L'immagine non si deforma, si adatta allo spazio */
     margin-bottom: 15px;
 }
 
@@ -226,3 +227,82 @@ tr:nth-child(even) {
 	font-size: 0.9em;
 }
    
+/* ==========================================================================
+   8. HOMEPAGE (Hero Section e Vantaggi)
+   ========================================================================== */
+.hero-section {
+    background-color: #1a1a1a; /* Grigio molto scuro, elegante */
+    color: #ffffff;
+    text-align: center;
+    padding: 80px 20px;
+    margin-bottom: 40px;
+    border-radius: 8px; /* Bordi leggermente arrotondati */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.hero-section h1 {
+    color: #ffffff;
+    font-size: 2.8em;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #cccccc;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Bottone della Hero Section */
+.btn-hero {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 15px 35px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    border: 2px solid #ffffff;
+    border-radius: 30px; /* Bottone a pillola */
+    transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+/* Layout dei Vantaggi (Uso Flexbox) */
+.features-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 20px; /* Spazio tra i box */
+}
+
+.feature-box {
+    width: 32%;
+    text-align: center;
+    padding: 25px 15px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.feature-box h3 {
+    margin-top: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #000000;
+}
+
+.feature-box p {
+    font-size: 0.95em;
+    color: #666666;
+    margin: 0;
+}

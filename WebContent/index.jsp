@@ -36,6 +36,20 @@
                 </ul>
             </div>
         <% } %>
+       <div class="features-section">
+            <div class="feature-box">
+                <h3>🚚 Spedizione Gratuita</h3>
+                <p>Su tutti gli ordini superiori a 50€. Consegna rapida e tracciata in 24/48h in tutta Italia.</p>
+            </div>
+            <div class="feature-box">
+                <h3>🔄 Reso Facile</h3>
+                <p>Hai 30 giorni di tempo per cambiare idea. La procedura di reso è gratuita e veloce.</p>
+            </div>
+            <div class="feature-box">
+                <h3>🛡️ Qualità Premium</h3>
+                <p>Solo lenti certificate con protezione totale dai raggi solari dannosi UV400.</p>
+            </div>
+        </div>
         
     </div>
 </body>
