@@ -37,6 +37,8 @@ public class CancellaProdottoServlet extends HttpServlet {
 				prodottoDAO.doDelete(id);
 			} catch (SQLException | NumberFormatException e) {
 				e.printStackTrace();
+				response.sendRedirect(request.getContextPath() + "/CatalogoServlet?errore=cancellazione");
+				return;
 			}
 		}
 		// Dopo aver eliminato, rimandiamo l'admin al catalogo per vedere il risultato

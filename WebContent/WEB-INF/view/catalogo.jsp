@@ -22,6 +22,15 @@
         
         <h2>La nostra Collezione di Occhiali da Sole</h2>
         
+        <% 
+            String errore = request.getParameter("errore");
+            if ("esaurito".equals(errore)) { 
+        %>
+            <div style="background-color: #ffe6e6; color: #cc0000; padding: 15px; border: 1px solid #cc0000; text-align: center; margin-bottom: 20px; border-radius: 5px; font-weight: bold;">
+                 Impossibile aggiungere: le quantità richieste superano le scorte in magazzino!
+            </div>
+        <%  } %>
+        
         <% if (prodotti != null && !prodotti.isEmpty()) { %>
             
             <%-- INIZIO GRIGLIA PRODOTTI --%>
