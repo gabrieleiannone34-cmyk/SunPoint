@@ -18,6 +18,18 @@
 <body>
 	<div class="container">
 	<h2>Il tuo Carrello</h2>
+	
+	<% 
+            String errore = request.getParameter("errore");
+            if ("esaurito".equals(errore)) { 
+        %>
+            <div style="background-color: #ffe6e6; color: #cc0000; padding: 15px; border: 1px solid #cc0000; text-align: center; margin-bottom: 20px; border-radius: 5px; font-weight: bold;">
+                 Impossibile aggiungere: le quantità richieste superano le scorte in magazzino!
+            </div>
+        <% 
+            } 
+        %>
+        
 	<a href="${pageContext.request.contextPath}/CatalogoServlet">Continua lo shopping</a> | <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
 	
 	<%-- Mostrinamo gli elementi del carrello (Se non è vuoto) tramite una tabella --%>
@@ -29,7 +41,6 @@
 				<th>Prezzo</th>
 				<th>Quantità</th>
                 <th>Totale Riga</th>
-                <th>Azioni</th>
 			</tr>
 				
 			<%-- Scorriamo gli occhiali nel carrello uno per uno --%>

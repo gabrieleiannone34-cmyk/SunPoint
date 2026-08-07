@@ -43,8 +43,14 @@ public class GestioneCarrelloServlet extends HttpServlet {
 					if ("aumenta".equals(azione)) {
 						try {
 							Prodotto occhialeDb = prodottoDAO.doRetrieveById(idProdotto);
-							if (occhialeDb != null && item.getQuantita() < occhialeDb.getQuantita()) {
-								item.incrementaQuantita();
+							if (occhialeDb != null) {
+								if (item.getQuantita() < occhialeDb.getQuantita()) {
+									item.incrementaQuantita();
+								} else {
+									// NOVITÀ: Le scorte sono finite! Rimandiamo al carrello con l'errore
+									response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet?errore=esaurito");
+									return; // Blocchiamo l'esecuzione qui
+								}
 							}
 						} catch (SQLException e) {
 							e.printStackTrace();
@@ -54,15 +60,16 @@ public class GestioneCarrelloServlet extends HttpServlet {
 						if (item.getQuantita() > 1) {
 							item.decrementaQuantita();
 						} else {
-							carrello.remove(i); // Se la quantità arriva a 0, rimuoviamo l'articolo dalla lista
+							carrello.remove(i); // Se la quantità arriva a 0, rimuoviamo l'articolo
 						}
 					}
-					break;
+					break; // Esci dal ciclo for una volta trovato e modificato l'oggetto
 				}
 			}
 			session.setAttribute("carrello", carrello);
 		}
 
+		// Se va tutto bene (nessun errore), ricarica il carrello normalmente
 		response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
 	}
 }

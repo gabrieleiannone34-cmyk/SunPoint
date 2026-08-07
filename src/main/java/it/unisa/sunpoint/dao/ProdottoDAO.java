@@ -163,41 +163,44 @@ public class ProdottoDAO {
  		}
  	}
  	//Metodo ESCLUSIVO per admin: Metodo per ELIMINARE un prodotto dal catalogo
- 	public synchronized boolean doDelete(int id) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		int result = 0;
+ 	//Metodo ESCLUSIVO per admin: Metodo per ELIMINARE un prodotto dal catalogo
+ 		public synchronized boolean doDelete(int id) throws SQLException {
+ 			Connection connection = null;
+ 			PreparedStatement preparedStatement = null;
+ 			int result = 0;
 
-		try {
-			connection = ds.getConnection();
-			
-			// 1. PRIMO PASSO: Cancelliamo l'occhiale dai carrelli degli utenti
-			String deleteCartSQL = "DELETE FROM ElementiCarrello WHERE prodotto_id = ?";
-			preparedStatement = connection.prepareStatement(deleteCartSQL);
-			preparedStatement.setInt(1, id);
-			preparedStatement.executeUpdate();
-			
-			preparedStatement.close(); // Chiudiamo il primo statement per fare spazio al secondo
+ 			try {
+ 				connection = ds.getConnection();
+ 				
+ 				// 1. PRIMO PASSO: Cancelliamo l'occhiale dai carrelli in sospeso
+ 				String deleteCartSQL = "DELETE FROM ElementiCarrello WHERE prodotto_id = ?";
+ 				preparedStatement = connection.prepareStatement(deleteCartSQL);
+ 				preparedStatement.setInt(1, id);
+ 				preparedStatement.executeUpdate();
+ 				preparedStatement.close(); // Chiudiamo per fare spazio al prossimo comando
+ 				
+ 				// 2. SECONDO PASSO: Cancelliamo l'occhiale dagli ordini passati
+ 				String deleteOrdersSQL = "DELETE FROM Articoli_ordinati WHERE product_id = ?";
+ 				preparedStatement = connection.prepareStatement(deleteOrdersSQL);
+ 				preparedStatement.setInt(1, id);
+ 				preparedStatement.executeUpdate();
+ 				preparedStatement.close(); // Chiudiamo di nuovo
+ 				
+ 				// 3. TERZO PASSO: Ora il DB è completamente libero. Eliminiamo l'occhiale!
+ 				String deleteSQL = "DELETE FROM Prodotti WHERE id = ?";
+ 				preparedStatement = connection.prepareStatement(deleteSQL);
+ 				preparedStatement.setInt(1, id);
+ 				
+ 				result = preparedStatement.executeUpdate();
 
-			/* 
-			 * Nota: se hai anche una tabella per lo storico ordini (es. ComposizioneOrdine),
-			 * dovresti fare un'altra DELETE qui in mezzo per pulire anche quella!
-			 */
-
-			// 2. SECONDO PASSO: Ora che il DB è "pulito", eliminiamo l'occhiale
-			String deleteSQL = "DELETE FROM Prodotti WHERE id = ?";
-			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, id);
-			
-			result = preparedStatement.executeUpdate();
-
-		} finally {
-			if (preparedStatement != null) preparedStatement.close();
-			if (connection != null) connection.close();
-		}
-		
-		return (result != 0);
-	}
+ 			} finally {
+ 				// Chiudiamo l'ultimo statement e la connessione
+ 				if (preparedStatement != null) preparedStatement.close();
+ 				if (connection != null) connection.close();
+ 			}
+ 			
+ 			return (result != 0);
+ 		}
  	//Metodo ESCLUSIVO per admin: Metodo per AGGIORNARE i dati di un prodotto esistente
  	public synchronized void doUpdate(Prodotto prodotto) throws SQLException {
 		Connection connection = null;
