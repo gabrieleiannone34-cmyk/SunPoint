@@ -25,28 +25,28 @@ public class CarrelloServlet extends HttpServlet {
 		
 	}
 
-	// Usiamo doPost perché il form nella pagina del catalogo usa method="POST"
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Catturiamo l'ID degli occhiali che l'utente ha cliccato
+		
 		int idProdotto = Integer.parseInt(request.getParameter("idProdotto"));
 		
 		ProdottoDAO prodottoDAO = new ProdottoDAO();
 		
 		try {
-			//Andiamo a prendere gli occhiali veri e propri dal database
+			
 			Prodotto occhialeScelto = prodottoDAO.doRetrieveById(idProdotto);
 			
 			if (occhialeScelto != null) {
-				//Apriamo il cassetto della sessione
+				
 				HttpSession session = request.getSession();
 				
-				//Cerchiamo se l'utente ha già un carrello. Se non ce l'ha, ne creiamo uno vuoto.
+				
                 List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
                 if (carrello == null) {
                     carrello = new ArrayList<>();
                 }
                 
-             // Verifichiamo se l'occhiale è già presente nel carrello
+             
                 ItemCarrello itemTrovato = null;
                 int pezziGiaNelCarrello = 0;
                 for (ItemCarrello item : carrello) {
@@ -57,12 +57,12 @@ public class CarrelloServlet extends HttpServlet {
                     }
                 }
 
-                //LA REGOLA D'ORO: Aggiungiamo al carrello SOLO SE non superiamo le scorte
+                
                 if (pezziGiaNelCarrello < occhialeScelto.getQuantita()) {
                 	if (itemTrovato != null) {
-                		itemTrovato.incrementaQuantita(); // Se c'è già, aumentiamo solo la quantità
+                		itemTrovato.incrementaQuantita(); 
                 	} else {
-                		carrello.add(new ItemCarrello(occhialeScelto, 1)); // Altrimenti creiamo un nuovo elemento con quantità 1
+                		carrello.add(new ItemCarrello(occhialeScelto, 1)); 
                 	}
                         session.setAttribute("carrello", carrello);
                         response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
