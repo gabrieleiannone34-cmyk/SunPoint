@@ -12,43 +12,50 @@ import java.sql.SQLException;
 import java.util.List;
 
 import it.unisa.sunpoint.dao.CarrelloDAO;
+import it.unisa.sunpoint.model.ItemCarrello;
 import it.unisa.sunpoint.model.Prodotto;
 import it.unisa.sunpoint.model.Utente;
 
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// request.getSession(false) significa: dammi la sessione solo se esiste già, non crearne una nuova
-		HttpSession session = request.getSession(false);
-		
-		if(session != null) {
-			Utente utente = (Utente) session.getAttribute("utenteLoggato");
-			List<Prodotto> carrello = (List<Prodotto>) session.getAttribute("carrello");
+		HttpSession session = request.getSession();
+		Utente utente = (Utente) session.getAttribute("utenteLoggato");
+
+		System.out.println("--- LOGOUT AVVIATO ---");
+
+		if (utente != null) {
+			System.out.println("Utente in fase di logout: " + utente.getNome());
 			
-			//Se l'utente era loggato e aveva roba nel carrello, SALVIAMO NEL DB!
-			if (utente != null && carrello != null && !carrello.isEmpty()) {
-                CarrelloDAO carrelloDAO = new CarrelloDAO();
-                try {
-                    carrelloDAO.salvaCarrello(utente.getId(), carrello);
-                } catch (SQLException e) {
-                    System.out.println("Errore salvataggio carrello al logout: " + e.getMessage());
-                }
-            }
-            
-            // 3. Ora possiamo distruggere la sessione in totale sicurezza
-            session.invalidate();
+			// Recuperiamo il carrello
+			List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
+			
+			if (carrello != null) {
+				System.out.println("Carrello in sessione trovato. Contiene " + carrello.size() + " articoli diversi.");
+				CarrelloDAO carrelloDAO = new CarrelloDAO();
+				
+				try {
+					carrelloDAO.salvaCarrello(utente.getId(), carrello);
+					System.out.println("Operazione sul DB completata con successo!");
+				} catch (SQLException e) {
+					System.out.println("ERRORE DATABASE DURANTE IL SALVATAGGIO DEL CARRELLO:");
+					e.printStackTrace(); // Questo stamperà l'errore esatto di MySQL!
+				}
+			} else {
+				System.out.println("Attenzione: Il carrello nella sessione era NULL.");
+			}
+		} else {
+			System.out.println("Nessun utente trovato in sessione (forse sessione già scaduta?).");
 		}
-		
-		//Rimanda l'utente alla home page (che ora lo vedrà come ospite non loggato)
+
+		// Distruggiamo la sessione e torniamo alla home
+		session.invalidate();
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
