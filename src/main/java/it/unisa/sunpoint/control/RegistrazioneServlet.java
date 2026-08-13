@@ -50,8 +50,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		try {
 			utenteDAO.doSave(nuovoUtente);
 			
-			// Se va tutto bene, reindirizziamo a una pagina di successo o alla login
-            // Per ora lo rimandiamo alla index (o creiamo una successo.jsp)
+			
 			request.setAttribute("messaggio", "Registrazione avvenuta con successo");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
