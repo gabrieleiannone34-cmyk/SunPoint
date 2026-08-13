@@ -23,7 +23,7 @@ public class CancellaProdottoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 
-		// Sicurezza: Solo gli Admin possono eliminare!
+		
 		if (utente == null || !"admin".equals(utente.getRole())) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			return;
@@ -41,7 +41,7 @@ public class CancellaProdottoServlet extends HttpServlet {
 				return;
 			}
 		}
-		// Dopo aver eliminato, rimandiamo l'admin al catalogo per vedere il risultato
+		
 		response.sendRedirect(request.getContextPath() + "/CatalogoServlet");
 	}
 
