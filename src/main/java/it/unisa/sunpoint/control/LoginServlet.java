@@ -25,13 +25,13 @@ import it.unisa.sunpoint.dao.UtenteDAO;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	// Mostra la pagina di login (nascosta nella cartella WEB-INF)
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
         dispatcher.forward(request, response);
 	}
 
-	// Riceve i dati dal form ed effettua il controllo
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -42,28 +42,28 @@ public class LoginServlet extends HttpServlet {
 		Utente utente = utenteDAO.doRetrieveByEmailAndPassword(email, password);
 		
 		if(utente != null) {
-			//Login riuscito, creiamo la sessione HTTP e salviamo l'intero oggetto Utente
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("utenteLoggato", utente);
 			
 			CarrelloDAO carrelloDAO = new CarrelloDAO();
 			try {
-			    // 1. Ora ci aspettiamo una lista di ItemCarrello, non più di Prodotto!
+			    
 			    List<ItemCarrello> carrelloSalvato = carrelloDAO.caricaCarrello(utente.getId());
 			    
-			    // Mettiamo la lista recuperata nella sessione
+			    
 			    session.setAttribute("carrello", carrelloSalvato);
 			    
 			} catch (SQLException e) {
 			    System.out.println("Errore caricamento carrello al login: " + e.getMessage());
-			    // 2. Se c'è un errore, creiamo una lista vuota di ItemCarrello (NON di Prodotto!)
+			    
 			    session.setAttribute("carrello", new ArrayList<ItemCarrello>());
 			}
 			
-			// Reindirizziamo l'utente alla home page
+			
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {
-			// Login fallito
+			
 			request.setAttribute("errore", "Email o password non validi. Riprova.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
 			dispatcher.forward(request, response);

@@ -31,13 +31,13 @@ public class ModificaProdottoServlet extends HttpServlet {
 			return;
 		}
 
-		// Leggiamo l'ID del prodotto da modificare
+		
 		int id = Integer.parseInt(request.getParameter("id"));
 		ProdottoDAO prodottoDAO = new ProdottoDAO();
 		
 		try {
 			Prodotto prodotto = prodottoDAO.doRetrieveById(id);
-			// Passiamo il prodotto alla pagina JSP in modo che possa pre-compilare i campi
+			
 			request.setAttribute("prodottoDaModificare", prodotto);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/modificaProdotto.jsp");
@@ -57,7 +57,7 @@ public class ModificaProdottoServlet extends HttpServlet {
 		}
 
 		try {
-			// Recuperiamo i nuovi dati inseriti nel form
+			
 			int id = Integer.parseInt(request.getParameter("id"));
 			String nome = request.getParameter("nome");
 			String descrizione = request.getParameter("descrizione");
@@ -73,11 +73,11 @@ public class ModificaProdottoServlet extends HttpServlet {
 			prodottoAggiornato.setQuantita(quantita);
 			prodottoAggiornato.setImagePath(imagePath);
 
-			// Salviamo le modifiche sul Database
+			
 			ProdottoDAO prodottoDAO = new ProdottoDAO();
 			prodottoDAO.doUpdate(prodottoAggiornato);
 
-			// Torniamo al catalogo
+			
 			response.sendRedirect(request.getContextPath() + "/CatalogoServlet");
 
 		} catch (SQLException | NumberFormatException e) {

@@ -24,35 +24,23 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 
-		System.out.println("--- LOGOUT AVVIATO ---");
-
 		if (utente != null) {
-			System.out.println("Utente in fase di logout: " + utente.getNome());
-			
-			// Recuperiamo il carrello
 			List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
 			
 			if (carrello != null) {
-				System.out.println("Carrello in sessione trovato. Contiene " + carrello.size() + " articoli diversi.");
 				CarrelloDAO carrelloDAO = new CarrelloDAO();
 				
 				try {
 					carrelloDAO.salvaCarrello(utente.getId(), carrello);
-					System.out.println("Operazione sul DB completata con successo!");
 				} catch (SQLException e) {
-					System.out.println("ERRORE DATABASE DURANTE IL SALVATAGGIO DEL CARRELLO:");
-					e.printStackTrace(); // Questo stamperà l'errore esatto di MySQL!
+					e.printStackTrace(); 
 				}
-			} else {
-				System.out.println("Attenzione: Il carrello nella sessione era NULL.");
-			}
-		} else {
-			System.out.println("Nessun utente trovato in sessione (forse sessione già scaduta?).");
-		}
+		
 
-		// Distruggiamo la sessione e torniamo alla home
+		}
 		session.invalidate();
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

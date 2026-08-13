@@ -13,7 +13,7 @@ import java.io.IOException;
 public class VisualizzaCarrelloServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Usiamo doGet perché l'utente vuole solo VEDERE la pagina
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/carrello.jsp");
