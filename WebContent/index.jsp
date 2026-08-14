@@ -28,7 +28,7 @@
                 </ul>
             </div>
             
-        <% } else if (utente != null && "cliente".equals(utente.getRole())) { %>
+        <% } else if (utente != null && "user".equals(utente.getRole())) { %>
             <div style="background-color: #f9f9f9; padding: 20px; border-left: 4px solid #555; margin-top: 30px;">
                 <h3>Area Personale</h3>
                 <ul>

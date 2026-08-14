@@ -20,14 +20,12 @@ public class RegistrazioneServlet extends HttpServlet {
  
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Se qualcuno prova ad accedere alla servlet via URL diretto, lo rimandiamo al form
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
 	    dispatcher.forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Recupo dei parametri dalla form
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
 		String email = request.getParameter("email");
@@ -35,7 +33,6 @@ public class RegistrazioneServlet extends HttpServlet {
 		String indirizzo = request.getParameter("indirizzo");
 		String citta = request.getParameter("citta");
 		
-		//Creazione e aggiungiamo i parametri al JavaBean
 		Utente nuovoUtente = new Utente();
 		nuovoUtente.setNome(nome);
 		nuovoUtente.setCognome(cognome);
@@ -43,9 +40,8 @@ public class RegistrazioneServlet extends HttpServlet {
 		nuovoUtente.setPasswordHash(password);
 		nuovoUtente.setIndirizzo(indirizzo);
 		nuovoUtente.setCitta(citta);
-		nuovoUtente.setRole("user"); //ruolo default
+		nuovoUtente.setRole("user"); 
 		
-		//Invochiamo il DAO
 		UtenteDAO utenteDAO = new UtenteDAO();
 		try {
 			utenteDAO.doSave(nuovoUtente);
@@ -55,11 +51,9 @@ public class RegistrazioneServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
 		} catch(SQLException e) {
-			// Se c'è un errore (es. email già esistente nel DB)
             e.printStackTrace();
             request.setAttribute("errore", "Errore durante la registrazione. L'email potrebbe essere già in uso.");
             
-         // Rimandiamo indietro l'utente alla pagina di registrazione mostrando l'errore
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
             dispatcher.forward(request, response);
 		}

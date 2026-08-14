@@ -26,21 +26,19 @@ public class StoricoOrdiniServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 		
-		//Verifica se l'utente è loggato(se non è loggatto va alla pagina di login)
+		
 		if(utente == null) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 			return;
 		}
 		OrdineDAO ordineDAO = new OrdineDAO();
 		try {
-			// 2. Chiediamo al database tutti gli ordini di questo utente
+			
 			List<Ordine> storicoOrdini = ordineDAO.doRetrieveByUserId(utente.getId());
 			
-			// 3. Inseriamo la lista nella request
-			// (Usiamo la request e non la sessione perché è un dato "usa e getta" per visualizzare la pagina)
+			
 			request.setAttribute("storicoOrdini", storicoOrdini);
 			
-			// 4. Apriamo la porta della JSP nascosta
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/ordini.jsp");
 			dispatcher.forward(request, response);
 			

@@ -28,11 +28,11 @@ public class CheckoutServlet extends HttpServlet {
 	
 		HttpSession session = request.getSession();
 		
-		// Recuperiamo l'utente loggato e il carrello della sessione
+		
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 		List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
 		
-		// 2. Controlli di sicurezza: l'utente deve essere loggato e il carrello non deve essere vuoto
+		
 		if (utente == null) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
             return;
@@ -43,43 +43,43 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
         
-        // 3. Calcoliamo il totale dei prodotti nel carrello
+        
         double totaleDaPagare = 0.0;
         for (ItemCarrello item : carrello) {
             totaleDaPagare += item.getProdotto().getPrezzo();
         }
         
-        // 4. Prepariamo lo "scontrino" (il JavaBean Ordine)
+        
         Ordine nuovoOrdine = new Ordine();
-        nuovoOrdine.setUserId(utente.getId()); // Usiamo l'ID dell'utente loggato
+        nuovoOrdine.setUserId(utente.getId()); 
         nuovoOrdine.setTotale(totaleDaPagare);
         
         try {
-        	// 5. Passiamo lo scontrino al DAO per salvarlo in MySQL
+        	
         	OrdineDAO ordineDAO = new OrdineDAO();
-        	//Salviamo l'ordine e CATTURIAMO l'ID generato
+        	
         	int orderId = ordineDAO.doSave(nuovoOrdine);
         	
-        	//Se l'ordine è stato salvato correttamente (ID maggiore di zero)
+        	
             if (orderId > 0) {
-                // Salviamo tutti gli articoli in Articoli_ordinati!
+                
                 ordineDAO.salvaArticoliOrdine(orderId, carrello);
             }
             
-            //Scaliamo i pezzi dal magazzino 
+           
             ProdottoDAO prodottoDAO = new ProdottoDAO();
             for (ItemCarrello item : carrello) {
                 prodottoDAO.aggiornaQuantita(item.getProdotto().getId());
             }
             
-            // Visto che ha pagato, dobbiamo svuotare anche il carrello salvato nel Database
+            
             CarrelloDAO carrelloDAO = new CarrelloDAO();
             carrelloDAO.svuotaCarrelloDB(utente.getId());
             
-         // Mettiamo il numero dell'ordine nello zaino per la pagina JSP
+        
             request.setAttribute("numeroOrdine", orderId);
             
-         // Svuotiamo la sessione e rimandiamo alla conferma
+         
             session.removeAttribute("carrello");
             request.getRequestDispatcher("/WEB-INF/view/conferma.jsp").forward(request, response);
             

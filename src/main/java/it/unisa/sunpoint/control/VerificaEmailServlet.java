@@ -24,7 +24,7 @@ public class VerificaEmailServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         String email = request.getParameter("email");
-        String risultato = "disponibile"; // default
+        String risultato = "disponibile"; 
 
         if (email != null && !email.trim().isEmpty()) {
             UtenteDAO utenteDAO = new UtenteDAO();
@@ -38,7 +38,7 @@ public class VerificaEmailServlet extends HttpServlet {
             }
         }
 
-        // 2. Creiamo l'oggetto JSON e lo stampiamo
+        
         JSONObject json = new JSONObject();
         json.put("result", risultato);
         out.print(json.toString());

@@ -23,19 +23,19 @@ public class RimuoviCarrelloServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. Recuperiamo l'ID dell'occhiale che l'utente vuole cancellare
+		
         String idProdottoRim = request.getParameter("idProdotto");
         
         if (idProdottoRim != null) {
             int idProdotto = Integer.parseInt(idProdottoRim);
             
-         // 2. Apriamo la sessione e prendiamo il carrello
+        
          HttpSession session = request.getSession();
          List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
         
          if (carrello != null) {
              for (int i = 0; i < carrello.size(); i++) {
-                 // 2. Dobbiamo usare getProdotto().getId() per trovare l'occhiale
+                 
                  if (carrello.get(i).getProdotto().getId() == idProdotto) {
                      carrello.remove(i);
                      break;
@@ -45,7 +45,7 @@ public class RimuoviCarrelloServlet extends HttpServlet {
          }
             
       }
-     // 5. Ricarichiamo la pagina del carrello, che ora mostrerà un occhiale in meno!
+     
         response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet");
 	}
 

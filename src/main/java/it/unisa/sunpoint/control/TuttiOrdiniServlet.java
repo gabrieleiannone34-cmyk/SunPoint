@@ -31,7 +31,7 @@ public class TuttiOrdiniServlet extends HttpServlet {
 			return;
 		}
 
-		// Catturiamo i filtri dalla richiesta (se ci sono)
+		
 		String dataInizio = request.getParameter("dataInizio");
 		String dataFine = request.getParameter("dataFine");
 		String idCliente = request.getParameter("idCliente");
@@ -40,14 +40,14 @@ public class TuttiOrdiniServlet extends HttpServlet {
 		try {
 			List<Ordine> ordini;
 			
-			// Se c'è almeno un filtro attivo, usiamo la ricerca filtrata
+			
 			if ((dataInizio != null && !dataInizio.isEmpty()) || 
 			    (dataFine != null && !dataFine.isEmpty()) || 
 			    (idCliente != null && !idCliente.trim().isEmpty())) {
 				
 				ordini = ordineDAO.doRetrieveByFilters(dataInizio, dataFine, idCliente);
 			} else {
-				// Altrimenti, mostriamo tutto
+				
 				ordini = ordineDAO.doRetrieveAll();
 			}
 			
