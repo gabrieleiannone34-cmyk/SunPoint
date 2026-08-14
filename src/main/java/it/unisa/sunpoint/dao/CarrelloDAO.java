@@ -29,7 +29,7 @@ public class CarrelloDAO {
         }
     }
 
-    // 1. Svuota il carrello salvato nel DB (usato prima di un nuovo salvataggio)
+    
     public synchronized void svuotaCarrelloDB(int userId) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -46,8 +46,7 @@ public class CarrelloDAO {
         }
     }
 
-    // 2. Salva il carrello della sessione dentro MySQL
-    // CORREZIONE: Ora accetta List<ItemCarrello> invece di List<Prodotto>
+    
     public synchronized void salvaCarrello(int userId, List<ItemCarrello> carrello) throws SQLException {
         
         svuotaCarrelloDB(userId);
@@ -57,18 +56,18 @@ public class CarrelloDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         
-        // CORREZIONE: Inseriamo la quantità reale invece di forzare "1", e usiamo utente_id
+        
         String insertSQL = "INSERT INTO ElementiCarrello (user_id, prodotto_id, quantita) VALUES (?, ?, ?)";
 
         try {
             connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
 
-            // CORREZIONE: Ora cicliamo sugli ItemCarrello
+            
             for (ItemCarrello item : carrello) {
                 preparedStatement.setInt(1, userId);
-                preparedStatement.setInt(2, item.getProdotto().getId()); // Prendiamo l'ID dall'occhiale dentro l'item
-                preparedStatement.setInt(3, item.getQuantita());         // Prendiamo la quantità esatta
+                preparedStatement.setInt(2, item.getProdotto().getId()); 
+                preparedStatement.setInt(3, item.getQuantita());         
                 preparedStatement.executeUpdate();
             }
         } finally {
@@ -77,15 +76,11 @@ public class CarrelloDAO {
         }
     }
 
-    // 3. Recupera il carrello da MySQL e lo ritrasforma in List<Prodotto> al Login
+    
     public List<ItemCarrello> caricaCarrello(int idUtente) throws SQLException {
         List<ItemCarrello> carrelloSalvato = new ArrayList<>();
         
-        // Facciamo una JOIN tra il carrello salvato e i prodotti per prendere tutti i dati
-        String query = "SELECT p.*, ec.quantita AS quantita_carrello " +
-                "FROM ElementiCarrello ec " +
-                "JOIN Prodotti p ON ec.prodotto_id = p.id " +
-                "WHERE ec.user_id = ?";
+        String query = "SELECT p.*, ec.quantita AS quantita_carrello FROM ElementiCarrello ec JOIN Prodotti p ON ec.prodotto_id = p.id WHERE ec.user_id = ?";
                        
         try (Connection con = ds.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -94,21 +89,19 @@ public class CarrelloDAO {
             
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    // 1. Ricostruiamo l'oggetto Prodotto
+                    
                     Prodotto p = new Prodotto();
                     p.setId(rs.getInt("id"));
                     p.setNome(rs.getString("nome"));
                     p.setPrezzo(rs.getDouble("prezzo"));
-                    // (Setta anche gli altri campi come descrizione e image_path se ti servono)
-                    
-                    // 2. Recuperiamo la quantità che l'utente aveva lasciato nel carrello
+
                     int quantita = rs.getInt("quantita");
                     
                     int quantitaNelCarrello = rs.getInt("quantita_carrello");
 					
 					ItemCarrello item = new ItemCarrello(p, quantitaNelCarrello);
                     
-                    // 4. Lo aggiungiamo alla lista
+                   
                     carrelloSalvato.add(item);
                 }
             }

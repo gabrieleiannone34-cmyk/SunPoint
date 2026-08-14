@@ -26,7 +26,7 @@ public class UtenteDAO {
 	}
 	
 	private static final String TABLE_NAME = "Utenti";
-	// Registrazione
+
 	public synchronized void doSave(Utente utente) throws SQLException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -53,7 +53,6 @@ public class UtenteDAO {
         }
 	}
 
-	// Metodo di ricerca per Login (Email + Password)
 	public synchronized Utente doRetrieveByEmailAndPassword(String email, String passwordHash) throws SQLException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -94,7 +93,7 @@ public class UtenteDAO {
         }
         return utente;
 	}
-	// Metodo per AJAX: Controlla se un'email è già registrata
+
 	public synchronized boolean checkEmailExists(String email) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -109,7 +108,6 @@ public class UtenteDAO {
 				
 				rs = preparedStatement.executeQuery();
 				
-				// Se il ResultSet ha almeno una riga, l'email è già nel DB
 				if(rs.next()) {
 					exists = true;
 				}

@@ -10,7 +10,7 @@ public class Prodotto implements Serializable {
 	private String descrizione;
 	private double prezzo;
 	private int quantita;
-	private String imagePath; //Percorso dell'immagine
+	private String imagePath; 
 	
 	public Prodotto() {	
 	}

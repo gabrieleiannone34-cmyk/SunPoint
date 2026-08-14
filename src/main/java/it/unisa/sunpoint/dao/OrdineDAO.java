@@ -31,7 +31,7 @@ public class OrdineDAO {
 	
 	private static final String TABLE_NAME = "Ordini";
 	
-	//Metodo per salvare un nuovo ordine nel database
+	
 	public synchronized int doSave(Ordine ordine) throws SQLException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -42,13 +42,11 @@ public class OrdineDAO {
         
      try {
     	 connection = ds.getConnection();
-    	 //Statement.RETURN_GENERATED_KEYS dice a MySQL di ridarci l'ID appena creato!
     	 preparedStatement = connection.prepareStatement(insertSQL, PreparedStatement.RETURN_GENERATED_KEYS);
     	 preparedStatement.setInt(1, ordine.getUserId());
     	 preparedStatement.setDouble(2, ordine.getTotale());
     	 preparedStatement.executeUpdate();
     	 
-    	 //Prendiamo l'id appena generato
     	 rs = preparedStatement.getGeneratedKeys();
          if (rs.next()) {
              orderId = rs.getInt(1);
@@ -58,14 +56,14 @@ public class OrdineDAO {
          if (preparedStatement != null) preparedStatement.close();
          if (connection != null) connection.close();
      }
-     return orderId; // Restituiamo il numero dello scontrino alla Servlet
+     return orderId; 
     }
-	// Nuovo metodo per salvare le singole voci dello scontrino
+
 	public synchronized void salvaArticoliOrdine(int orderId, List<ItemCarrello> carrello) throws SQLException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
         
-        // Inseriamo l'ID dell'ordine, l'ID dell'occhiale, quantità 1 e il prezzo attuale
+        
         String insertSQL = "INSERT INTO Articoli_ordinati (order_id, product_id, quantita, prezzo_al_momento) VALUES (?, ?, ?, ?)";
         
         try {
@@ -76,29 +74,25 @@ public class OrdineDAO {
                 preparedStatement.setInt(1, orderId);
                 preparedStatement.setInt(2, item.getProdotto().getId());
                 
-                // Inseriamo la quantità esatta scelta dall'utente 
                 preparedStatement.setInt(3, item.getQuantita()); 
                 
-                // Congeliamo il prezzo al momento dell'acquisto (Requisito storico!)
                 preparedStatement.setDouble(4, item.getProdotto().getPrezzo());
                 
-                preparedStatement.executeUpdate(); // Spara il comando su MySQL
+                preparedStatement.executeUpdate(); 
             }
         } finally {
             if (preparedStatement != null) preparedStatement.close();
             if (connection != null) connection.close();
         }
 	}
-	// Nuovo metodo per estrarre lo storico ordini di un cliente
+
 	public synchronized List<Ordine> doRetrieveByUserId(int userId) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 			
-		// Creiamo una lista vuota per contenere gli ordini trovati
 		List<Ordine> ordini = new ArrayList<>();
 			
-		// Li ordiniamo in modo decrescente (dal più recente al più vecchio)
 		String selectSQL = "SELECT * FROM Ordini WHERE user_id = ? ORDER BY id DESC";
 			
 		try {
@@ -111,6 +105,7 @@ public class OrdineDAO {
 				Ordine ordine = new Ordine();
 				ordine.setId(rs.getInt("id"));
 				ordine.setUserId(rs.getInt("user_id"));
+				ordine.setDataOrdine(rs.getTimestamp("data_ordine"));
 				ordine.setTotale(rs.getDouble("totale"));
 		
 				ordini.add(ordine);
@@ -123,7 +118,7 @@ public class OrdineDAO {
 			
 		return ordini;
 	}
-	// Metodo ESCLUSIVO per l'Admin: recupera TUTTI gli ordini del negozio
+
 	public synchronized List<Ordine> doRetrieveAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -131,7 +126,6 @@ public class OrdineDAO {
 			
 		List<Ordine> tuttiOrdini = new ArrayList<>();
 			
-		// Li ordiniamo dal più recente al più vecchio
 		String selectSQL = "SELECT * FROM Ordini ORDER BY id DESC";
 			
 		try {
@@ -143,7 +137,9 @@ public class OrdineDAO {
 				Ordine ordine = new Ordine();
 				ordine.setId(rs.getInt("id"));
 				ordine.setUserId(rs.getInt("user_id")); 
+				ordine.setDataOrdine(rs.getTimestamp("data_ordine"));
 				ordine.setTotale(rs.getDouble("totale"));
+				
 					
 				tuttiOrdini.add(ordine);
 		}
@@ -157,14 +153,12 @@ public class OrdineDAO {
 		return tuttiOrdini;
 	}
 	
-	// Metodo ESCLUSIVO per l'Admin: recupera ordini filtrati
 	public synchronized List<Ordine> doRetrieveByFilters(String dataInizio, String dataFine, String idCliente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		List<Ordine> ordiniFiltrati = new java.util.ArrayList<>();
 			
-		// Usiamo "WHERE 1=1" come trucco per poter accodare facilmente gli "AND" successivi
 		StringBuilder query = new StringBuilder("SELECT * FROM Ordini WHERE 1=1");
 			
 		if (dataInizio != null && !dataInizio.isEmpty()) {

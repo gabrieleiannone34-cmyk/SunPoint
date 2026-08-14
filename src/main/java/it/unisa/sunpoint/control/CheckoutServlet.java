@@ -46,7 +46,7 @@ public class CheckoutServlet extends HttpServlet {
         
         double totaleDaPagare = 0.0;
         for (ItemCarrello item : carrello) {
-            totaleDaPagare += item.getProdotto().getPrezzo();
+        	totaleDaPagare += (item.getProdotto().getPrezzo() * item.getQuantita());
         }
         
         

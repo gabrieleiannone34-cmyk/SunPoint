@@ -31,13 +31,12 @@ public class ProdottoDAO {
 	
 	private static final String TABLE_NAME = "Prodotti";
 	
-	// Metodo utilizzato per estrarre tutti i prodotti dal database
+
 	public synchronized List<Prodotto> doRetrieveAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
-		// Creiamo una lista vuota che riempiremo con i prodotti
 		List<Prodotto> prodotti = new ArrayList<>();
 		
 		String selectSQL = "SELECT * FROM " + TABLE_NAME;
@@ -47,7 +46,6 @@ public class ProdottoDAO {
 			preparedStatement = connection.prepareStatement(selectSQL);
 			resultSet = preparedStatement.executeQuery();
 			
-			//Scorriamo tutte le righe trovate nel database
 			while (resultSet.next()) {
                 Prodotto bean = new Prodotto();
                 bean.setId(resultSet.getInt("id"));
@@ -56,8 +54,6 @@ public class ProdottoDAO {
                 bean.setPrezzo(resultSet.getDouble("prezzo"));
                 bean.setQuantita(resultSet.getInt("quantita"));
                 bean.setImagePath(resultSet.getString("image_path"));
-                
-                // Aggiungiamo il singolo prodotto alla lista
                 prodotti.add(bean);
 			}
 		} finally {
@@ -73,22 +69,21 @@ public class ProdottoDAO {
 		}
 		return prodotti;
 	}
-	// Metodo per estrarre un singolo prodotto usando il suo ID
+
 	public synchronized Prodotto doRetrieveById(int id) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Prodotto bean = null; // Partiamo con un occhiale vuoto
+        Prodotto bean = null; 
 
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
 
         try {
             connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
-            preparedStatement.setInt(1, id); // Sostituiamo il "?" con l'ID richiesto
+            preparedStatement.setInt(1, id); 
             resultSet = preparedStatement.executeQuery();
 
-            // Usiamo 'if' e non 'while' perché l'ID è unico, troveremo massimo una riga
             if (resultSet.next()) {
                 bean = new Prodotto();
                 bean.setId(resultSet.getInt("id"));
@@ -109,25 +104,21 @@ public class ProdottoDAO {
                 }
             }
         }
-        return bean; // Restituisce l'occhiale trovato (o null se non esiste)
+        return bean; 
     }
-	
-	// Metodo per scalare di 1 la quantità di un prodotto venduto
+
     public synchronized void aggiornaQuantita(int idProdotto) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        // La query UPDATE: prende la quantità attuale e le sottrae 1
         String updateSQL = "UPDATE Prodotti SET quantita = quantita - 1 WHERE id = ?";
 
         try {
             connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(updateSQL);
             
-            // Sostituiamo il "?" con l'ID dell'occhiale venduto
             preparedStatement.setInt(1, idProdotto);
 
-            // Eseguiamo la modifica nel database
             preparedStatement.executeUpdate();
 
         } finally {
@@ -138,7 +129,7 @@ public class ProdottoDAO {
             }
         }
     }
- // Metodo ESCLUSIVO per l'Admin: inserisce un nuovo prodotto nel catalogo
+
  	public synchronized void doSave(Prodotto prodotto) throws SQLException {
  		Connection connection = null;
  		PreparedStatement preparedStatement = null;
@@ -162,8 +153,7 @@ public class ProdottoDAO {
  			if (connection != null) connection.close();
  		}
  	}
- 	//Metodo ESCLUSIVO per admin: Metodo per ELIMINARE un prodotto dal catalogo
- 	//Metodo ESCLUSIVO per admin: Metodo per ELIMINARE un prodotto dal catalogo
+
  		public synchronized boolean doDelete(int id) throws SQLException {
  			Connection connection = null;
  			PreparedStatement preparedStatement = null;
@@ -172,21 +162,19 @@ public class ProdottoDAO {
  			try {
  				connection = ds.getConnection();
  				
- 				// 1. PRIMO PASSO: Cancelliamo l'occhiale dai carrelli in sospeso
  				String deleteCartSQL = "DELETE FROM ElementiCarrello WHERE prodotto_id = ?";
  				preparedStatement = connection.prepareStatement(deleteCartSQL);
  				preparedStatement.setInt(1, id);
  				preparedStatement.executeUpdate();
- 				preparedStatement.close(); // Chiudiamo per fare spazio al prossimo comando
+ 				preparedStatement.close(); 
  				
- 				// 2. SECONDO PASSO: Cancelliamo l'occhiale dagli ordini passati
  				String deleteOrdersSQL = "DELETE FROM Articoli_ordinati WHERE product_id = ?";
  				preparedStatement = connection.prepareStatement(deleteOrdersSQL);
  				preparedStatement.setInt(1, id);
  				preparedStatement.executeUpdate();
- 				preparedStatement.close(); // Chiudiamo di nuovo
+ 				preparedStatement.close(); 
  				
- 				// 3. TERZO PASSO: Ora il DB è completamente libero. Eliminiamo l'occhiale!
+
  				String deleteSQL = "DELETE FROM Prodotti WHERE id = ?";
  				preparedStatement = connection.prepareStatement(deleteSQL);
  				preparedStatement.setInt(1, id);
@@ -194,14 +182,14 @@ public class ProdottoDAO {
  				result = preparedStatement.executeUpdate();
 
  			} finally {
- 				// Chiudiamo l'ultimo statement e la connessione
+
  				if (preparedStatement != null) preparedStatement.close();
  				if (connection != null) connection.close();
  			}
  			
  			return (result != 0);
  		}
- 	//Metodo ESCLUSIVO per admin: Metodo per AGGIORNARE i dati di un prodotto esistente
+
  	public synchronized void doUpdate(Prodotto prodotto) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -217,7 +205,7 @@ public class ProdottoDAO {
 			preparedStatement.setDouble(3, prodotto.getPrezzo());
 			preparedStatement.setInt(4, prodotto.getQuantita());
 			preparedStatement.setString(5, prodotto.getImagePath());
-			preparedStatement.setInt(6, prodotto.getId()); // La clausola WHERE!
+			preparedStatement.setInt(6, prodotto.getId()); 
 
 			preparedStatement.executeUpdate();
 		} finally {

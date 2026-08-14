@@ -12,7 +12,7 @@ public class Utente implements Serializable {
     private String passwordHash; 
     private String indirizzo;
     private String citta;
-    private String role; // user o admin (default admin)
+    private String role;
 	
     public Utente() {
     }
