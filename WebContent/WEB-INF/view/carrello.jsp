@@ -2,10 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.sunpoint.model.ItemCarrello" %>
 <%
-	//1. Apriamo il cassetto della sessione per prendere la lista degli occhiali
 	List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
 
-	// 2. Prepariamo una variabile per sommare i prezzi
 	double totale = 0.0;
 %>
 <!DOCTYPE html>
@@ -32,7 +30,6 @@
         
 	<a href="${pageContext.request.contextPath}/CatalogoServlet">Continua lo shopping</a> | <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
 	
-	<%-- Mostrinamo gli elementi del carrello (Se non è vuoto) tramite una tabella --%>
 	<% if (carrello != null && !carrello.isEmpty()) { %>
 	
 		<table>
@@ -43,12 +40,10 @@
                 <th>Totale Riga</th>
 			</tr>
 				
-			<%-- Scorriamo gli occhiali nel carrello uno per uno --%>
             <% for(ItemCarrello item : carrello) { 
             	double subtotale = item.getProdotto().getPrezzo() * item.getQuantita();
                 totale += subtotale;
             %>
-                <%-- Riga per il singolo prodotto --%>
                 <tr>
                     <td><%= item.getProdotto().getNome() %></td>
                     <td>€ <%= item.getProdotto().getPrezzo() %></td>
@@ -79,7 +74,6 @@
         
         <a href="${pageContext.request.contextPath}/SvuotaCarrelloServlet">Svuota il Carrello</a>
         
-	<%-- Se il carrello non esiste o è vuoto --%>
     <% } else { %>
         <p>Il tuo carrello è vuoto. Torna al catalogo per aggiungere un paio di occhiali!</p>
     <% } %>

@@ -10,7 +10,6 @@
 	<div class="container">
 	<h2>Accesso</h2>
 	
-	<%-- Stampa Errori di login (es. email o password errata) --%>
 	<%
 		String errore = (String) request.getAttribute("errore");
 		if(errore != null){
@@ -19,7 +18,6 @@
 		<p>Errore <%= errore %></p>
 	<% } %>
 	
-	<%-- Stampa messaggi di successo per il login --%>
 	<%
 		String messaggio = (String) request.getAttribute("messaggio");
 		if(messaggio != null){

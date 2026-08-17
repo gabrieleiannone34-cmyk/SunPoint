@@ -1,7 +1,3 @@
-/* ========================================================
-   PARTE 1: MOTORE AJAX (Controllo Email Asincrono)
-   ======================================================== */
-
 function createXMLHttpRequest() {
     var request;
     try {
@@ -86,17 +82,10 @@ function checkEmail() {
 }
 
 
-/* ========================================================
-   PARTE 2: VALIDAZIONE FORM (Stile del Professore)
-   ======================================================== */
-
-// 1. Costanti con le Regex 
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-// 2. Costanti con i messaggi di errore
 const passwordErrorMessage = "La password deve essere di almeno 8 caratteri con lettere e numeri.";
 
-// 3. La funzione generica del Professore per colorare i campi
 function validateFormElem(formElem, pattern, span, message) {
     if (formElem.value.match(pattern)) {
         formElem.classList.remove("error");
@@ -111,12 +100,10 @@ function validateFormElem(formElem, pattern, span, message) {
     }
 }
 
-// 4. Controllo finale quando si preme "Registrati"
-function validateRegistrazione() {
+function validaFormRegistrazione() {
     let valid = true;
     let form = document.getElementById("formRegistrazione");
 
-    // Validazione Password
     let spanPassword = document.getElementById("passwordError");
     if (!validateFormElem(form.password, passwordPattern, spanPassword, passwordErrorMessage)) {
         valid = false;

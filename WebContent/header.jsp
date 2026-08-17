@@ -9,7 +9,6 @@
             <li><a href="${pageContext.request.contextPath}/CatalogoServlet">Catalogo</a></li>
             <li><a href="${pageContext.request.contextPath}/VisualizzaCarrelloServlet">Carrello</a></li>
             
-            <%-- Controllo Sessione: Mostriamo Login o Logout in base allo stato --%>
             <% 
                Utente utenteNav = (Utente) session.getAttribute("utenteLoggato");
                if(utenteNav != null) { 

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="it.unisa.sunpoint.model.Prodotto" %>
 <%
-    // Recuperiamo il prodotto passato dalla Servlet
     Prodotto p = (Prodotto) request.getAttribute("prodottoDaModificare");
 %>
 <!DOCTYPE html>
@@ -16,7 +15,6 @@
 	<h2>Pannello di Controllo - Modifica Occhiale</h2>
 	
 	<form action="${pageContext.request.contextPath}/ModificaProdottoServlet" method="POST">
-	    <%-- Nascondiamo l'ID perché ci serve per l'UPDATE ma non va modificato a mano --%>
 		<input type="hidden" name="id" value="<%= p.getId() %>">
 		
 		<label>Nome Modello:</label><br>

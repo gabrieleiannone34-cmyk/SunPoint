@@ -10,7 +10,6 @@
 	<div class="container">
 	<h2>Registrazione</h2>
 	
-	<%-- Gli errori vengono stampati qui --%>
 	<%
 		String errore = (String) request.getAttribute("errore");
 		if(errore != null) {
@@ -41,12 +40,10 @@
 		<input type="submit" value="Registrati">
 	</form>
 	</div>
-	<!-- Passiamo il contextPath al Javascript prima di caricare il file esterno -->
     <script>
         var contextPath = "${pageContext.request.contextPath}";
     </script>
     
-    <!-- Carichiamo il file Javascript esterno dalla cartella scripts -->
-    <script src="${pageContext.request.contextPath}/scripts/registrazione.js"></script>
+    <script src="${pageContext.request.contextPath}/script/registrazione.js"></script>
 </body>
 </html>

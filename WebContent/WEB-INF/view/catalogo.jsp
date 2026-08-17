@@ -3,10 +3,8 @@
 <%@ page import="it.unisa.sunpoint.model.Prodotto" %>
 <%@ page import="it.unisa.sunpoint.model.Utente" %>
 <%
-    // Recupero della lista inviata dalla CatalogoServlet
     List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("catalogo");
-    
-    // Recupero dell'utente per i controlli Admin
+
     Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
 %>
 <!DOCTYPE html>
@@ -33,11 +31,9 @@
         
         <% if (prodotti != null && !prodotti.isEmpty()) { %>
             
-            <%-- INIZIO GRIGLIA PRODOTTI --%>
             <div class="catalogo-grid">
                 <% for(Prodotto p : prodotti) { %>
                     
-                    <%-- SINGOLA SCHEDA (CARD) --%>
                     <div class="prodotto-card">
                         
                         <img src="images/<%= p.getImagePath() %>" alt="<%= p.getNome() %>" class="prodotto-img">
@@ -46,13 +42,11 @@
                         <div class="descrizione-occhiale"><%= p.getDescrizione() %></div>
                         <div class="prodotto-prezzo">€ <%= p.getPrezzo() %></div>
                         
-                        <%-- FORM PER AGGIUNGERE AL CARRELLO --%>
                         <form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST">
                             <input type="hidden" name="idProdotto" value="<%= p.getId() %>">
                             <button type="submit" class="btn-carrello">Aggiungi al Carrello</button>
                         </form>
 
-                        <%-- OPZIONI PER L'ADMIN --%>
                         <% if (utenteLoggato != null && "admin".equals(utenteLoggato.getRole())) { %>
                             <div class="admin-card-actions">
                                 <strong>Opzioni Admin:</strong><br>

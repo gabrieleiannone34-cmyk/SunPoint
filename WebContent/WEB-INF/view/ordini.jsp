@@ -2,7 +2,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.sunpoint.model.Ordine" %>
 <%
-	//Recuperiamo la lista degli ordini preparata dalla Servlet
 	List<Ordine> ordini = (List<Ordine>) request.getAttribute("storicoOrdini");
 %>
 
@@ -19,7 +18,6 @@
 	<a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
 	<br>
 	
-	<%-- Se la lista esiste e non è vuota, mostriamo la tabella --%>
 	<% if (ordini != null && !ordini.isEmpty()) { %>
 		<table>
 			<tr>
@@ -27,7 +25,6 @@
 				<th>Totale Pagato</th>
 			</tr>
 			
-			<%-- Cicliamo su tutti gli ordini --%>
 			<% for(Ordine o: ordini) { %>
 				<tr>
 					<td># <%= o.getId() %></td>
@@ -36,7 +33,6 @@
 			<% } %>
 		</table>
 		
-	<%-- Se invece l'utente non ha mai comprato nulla --%>
 	<% } else { %>
         <p>Non hai ancora effettuato nessun ordine.</p>
         <p>Vai al <a href="${pageContext.request.contextPath}/CatalogoServlet">Catalogo</a> per iniziare i tuoi acquisti!</p>
