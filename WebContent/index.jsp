@@ -49,8 +49,28 @@
                 <h3>🛡️ Qualità Premium</h3>
                 <p>Solo lenti certificate con protezione totale dai raggi solari dannosi UV400.</p>
             </div>
-        </div>
-        
+        </div> 
     </div>
+    <div class="target-audience-section">
+            <h2 class="target-title">Adatto a tutti i generi e a tutte le età</h2>
+            
+            <div class="target-gallery">
+                <div class="target-item">
+                    <img src="${pageContext.request.contextPath}/images/donna.jpg" alt="Occhiali da sole per Donna">
+                    <h4>Donna</h4>
+                </div>
+                
+                <div class="target-item">
+                    <img src="${pageContext.request.contextPath}/images/uomo.jpg" alt="Occhiali da sole per Uomo">
+                    <h4>Uomo</h4>
+                </div>
+                
+                <div class="target-item">
+                    <img src="${pageContext.request.contextPath}/images/bambino.jpg" alt="Occhiali da sole per Bambino">
+                    <h4>Bambino</h4>
+                </div>
+            </div>
+        </div>
+    <jsp:include page="/footer.jsp" />
 </body>
 </html>

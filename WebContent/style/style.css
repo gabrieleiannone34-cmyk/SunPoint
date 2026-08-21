@@ -269,3 +269,61 @@ tr:nth-child(even) {
     color: #666666;
     margin: 0;
 }
+
+
+
+.target-audience-section {
+    text-align: center;
+    margin-top: 60px; /* Crea un bel po' di spazio dai 3 quadrati superiori */
+    margin-bottom: 40px;
+}
+
+.target-title {
+    font-size: 2em;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Usiamo Flexbox per allineare le 3 foto orizzontalmente */
+.target-gallery {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.target-item {
+    width: 32%; /* Ogni foto occupa circa un terzo dello spazio */
+}
+
+.target-item img {
+    width: 100%;
+    height: 350px; /* Forza tutte le foto ad avere la stessa altezza */
+    object-fit: cover; /* Taglia le parti in eccesso senza deformare la foto! */
+    border-radius: 8px; /* Smussa leggermente gli angoli */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Aggiunge una leggera ombra elegante */
+    transition: transform 0.3s ease; /* Prepara l'animazione */
+}
+
+/* Effetto Zoom quando passi col mouse (opzionale ma bellissimo) */
+.target-item img:hover {
+    transform: scale(1.03);
+}
+
+.target-item h4 {
+    margin-top: 15px;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsività per Smartphone: se lo schermo è piccolo, impila le foto */
+@media screen and (max-width: 768px) {
+    .target-gallery {
+        flex-direction: column; /* Cambia l'allineamento da orizzontale a verticale */
+    }
+    .target-item {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
