@@ -56,10 +56,8 @@ public class LoginServlet extends HttpServlet {
 			    
 			} catch (SQLException e) {
 			    System.out.println("Errore caricamento carrello al login: " + e.getMessage());
-			    
 			    session.setAttribute("carrello", new ArrayList<ItemCarrello>());
 			}
-			
 			
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {

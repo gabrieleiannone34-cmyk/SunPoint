@@ -29,7 +29,7 @@
 		<br>
 		<label for="password">Password:</label><br>
 		<input type="password" id="password" name="password" onchange="validateFormElem(this, passwordPattern, document.getElementById('passwordError'), passwordErrorMessage)" required><br>
-		<span id="passwordError" class="regstyle"></span>
+		<span id="passwordError" class="regstyle"></span><br>
 		
 		<label for="indirizzo">Indirizzo:</label><br>
 		<input type="text" id="indirizzo" name="indirizzo" required><br>

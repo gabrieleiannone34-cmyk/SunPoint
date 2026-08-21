@@ -37,7 +37,7 @@
 				<th>Modello Occhiali</th>
 				<th>Prezzo</th>
 				<th>Quantità</th>
-                <th>Totale Riga</th>
+                <th>Azione</th>
 			</tr>
 				
             <% for(ItemCarrello item : carrello) { 
@@ -46,7 +46,7 @@
             %>
                 <tr>
                     <td><%= item.getProdotto().getNome() %></td>
-                    <td>€ <%= item.getProdotto().getPrezzo() %></td>
+                    <td>€ <%= item.getProdotto().getPrezzo() * item.getQuantita()%></td>
                     <td><form action="<%= request.getContextPath() %>/GestioneCarrelloServlet" method="POST" style="display: inline-block;">
                             <input type="hidden" name="idProdotto" value="<%= item.getProdotto().getId() %>">
                             <button type="submit" name="azione" value="diminuisci" class="btn-quantita">-</button>  

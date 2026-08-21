@@ -1,7 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 100%; 
-    line-height: 1.6; /* Interlinea per migliorare la leggibilità */
+    line-height: 1.6; 
     color: #333333; 
     background-color: #f4f4f4;
     margin: 0;
@@ -13,13 +13,13 @@ h1, h2, h3 {
     font-weight: normal;
     color: #000000;
 }
-/* ==========================================================================
-   2. STRUTTURA SEMANTICA HTML5 E BOX MODEL
-   ========================================================================== */
+
+
+
 .container {
     width: 90%;
     max-width: 1200px;
-    margin: 0 auto; /* Centratura del blocco */
+    margin: 0 auto; 
     background-color: #ffffff;
     padding: 20px; 
 }
@@ -40,11 +40,11 @@ footer {
     font-size: 0.8em; 
     clear: both; 
 }
-/* ==========================================================================
-   3. MENU DI NAVIGAZIONE (Pseudo-classi e Liste)
-   ========================================================================== */
+
+
+
 nav ul {
-    list-style-type: none; /* Rimuove i pallini dalla lista */
+    list-style-type: none; 
     padding: 0;
     margin: 0;
     background-color: #333333;
@@ -52,15 +52,14 @@ nav ul {
 }
 
 nav ul li {
-    display: inline-block; /* Dispone gli elementi della lista orizzontalmente */
+    display: inline-block; 
 }
 
-/* Gestione degli stati dei link tramite pseudo-classi */
 nav ul li a:link, nav ul li a:visited {
     display: block;
     padding: 15px 25px;
     color: #ffffff;
-    text-decoration: none; /* Rimuove la sottolineatura di default */
+    text-decoration: none; 
     font-weight: bold;
 }
 
@@ -69,31 +68,31 @@ nav ul li a:hover {
     color: #ffffff;
 }
 
-/* ==========================================================================
-   4. LAYOUT DEL CATALOGO (Fluid Layout con Float)
-   ========================================================================== */
+
+
 .catalogo-grid {
     margin-top: 30px;
     margin-bottom: 30px;
-    overflow: hidden; /* Trucco per far sì che il contenitore "avvolga" gli elementi float interni */
+    overflow: hidden; 
 }
 
 .prodotto-card {
-    float: left; /* Estrae l'elemento dal flusso normale e lo allinea a sinistra */
-    width: 30%;  /* Tre colonne per riga */
-    margin: 0 1.5% 30px 1.5%; /* Margini percentuali per la fluidità */
+    float: left; 
+    width: 30%;  
+    margin: 0 1.5% 30px 1.5%; 
     padding: 15px;
-    border: 1px solid #e0e0e0; /* Shorthand property per il bordo */
+    border: 1px solid #e0e0e0; 
     text-align: center;
     background-color: #ffffff;
     box-sizing: border-box; 
 }
 
-/* Immagini fluide: si adattano alla larghezza del contenitore padre */
+
+
 .prodotto-img {
     max-width: 100%;
     height: 200px;
-    object-fit: contain; /* L'immagine non si deforma, si adatta allo spazio */
+    object-fit: contain; 
     margin-bottom: 15px;
 }
 
@@ -111,16 +110,15 @@ nav ul li a:hover {
 }
 
 .descrizione-occhiale {
-    height: 120px; /* Spazio fisso per il testo */
-    overflow-y: auto; /* Se sfora, appare la barra */
+    height: 120px; 
+    overflow-y: auto; 
     font-size: 0.9em;
     margin-bottom: 15px;
     padding-right: 5px;
 }
 
-/* ==========================================================================
-   5. BOTTONI E FORM
-   ========================================================================== */
+
+
 .btn-carrello, input[type="submit"] {
     background-color: #000000;
     color: #ffffff;
@@ -133,7 +131,7 @@ nav ul li a:hover {
 }
 
 .btn-carrello:hover, input[type="submit"]:hover {
-    background-color: #444444; /* Feedback visivo al passaggio del mouse */
+    background-color: #444444; 
 }
 
 input[type="text"], input[type="number"], input[type="date"], textarea {
@@ -166,12 +164,12 @@ input[type="text"], input[type="number"], input[type="date"], textarea {
     margin: 0 5px;
     font-weight: bold;
 }
-/* ==========================================================================
-   6. TABELLE (Carrello e Ordini)
-   ========================================================================== */
+
+
+
 table {
     width: 100%;
-    border-collapse: collapse; /* Unisce i bordi adiacenti delle celle in una singola linea */
+    border-collapse: collapse; 
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -188,32 +186,28 @@ th {
     text-transform: uppercase;
 }
 
-/* Pseudo-classe strutturale per le righe alternate (Zebra-striping) */
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-/* ==========================================================================
-   7. MEDIA QUERIES (Adaptive Layout / Breakpoints)
-   ========================================================================== */
 
-/* Layout Tablet: si passa da 3 colonne a 2 colonne */
+
+
 @media screen and (max-width: 980px) {
     .prodotto-card {
-        width: 46%; /* Dimensionamento per 2 elementi per riga */
+        width: 46%; 
         margin: 0 2% 20px 2%;
     }
 }
 
-/* Layout Smartphone: colonna singola e menu verticale */
 @media screen and (max-width: 540px) {
     .prodotto-card {
-        width: 96%; /* Occupa quasi tutto lo schermo */
+        width: 96%; 
         margin: 0 2% 20px 2%;
-        float: none; /* Annulla il float per ripristinare il normale flusso a blocchi */
+        float: none; 
     }
     
     nav ul li {
-        display: block; /* Il menu orizzontale diventa verticale */
+        display: block; 
     }
     
     nav ul li a:link, nav ul li a:visited {
@@ -226,38 +220,7 @@ tr:nth-child(even) {
 	margin-left: 10px;
 	font-size: 0.9em;
 }
-   
-/* ==========================================================================
-   8. HOMEPAGE (Hero Section e Vantaggi)
-   ========================================================================== */
-.hero-section {
-    background-color: #1a1a1a; /* Grigio molto scuro, elegante */
-    color: #ffffff;
-    text-align: center;
-    padding: 80px 20px;
-    margin-bottom: 40px;
-    border-radius: 8px; /* Bordi leggermente arrotondati */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
 
-.hero-section h1 {
-    color: #ffffff;
-    font-size: 2.8em;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.hero-section p {
-    font-size: 1.2em;
-    margin-bottom: 40px;
-    color: #cccccc;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Bottone della Hero Section */
 .btn-hero {
     background-color: #ffffff;
     color: #000000;
@@ -267,7 +230,7 @@ tr:nth-child(even) {
     text-transform: uppercase;
     font-size: 1.1em;
     border: 2px solid #ffffff;
-    border-radius: 30px; /* Bottone a pillola */
+    border-radius: 30px; 
     transition: all 0.3s ease;
 }
 
@@ -276,12 +239,11 @@ tr:nth-child(even) {
     color: #ffffff;
 }
 
-/* Layout dei Vantaggi (Uso Flexbox) */
 .features-section {
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
-    gap: 20px; /* Spazio tra i box */
+    gap: 20px; 
 }
 
 .feature-box {
