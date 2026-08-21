@@ -37,5 +37,6 @@
     </form>
     <p>Non hai un account? <a href="${pageContext.request.contextPath}/RegistrazioneServlet">Registrati qui</a></p>
     </div>
+    <jsp:include page="/footer.jsp" />
 </body>
 </html>

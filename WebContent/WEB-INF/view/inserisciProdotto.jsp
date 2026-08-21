@@ -33,5 +33,6 @@
 	<br>
 	<a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a>
 	</div>
+	<jsp:include page="/footer.jsp" />
 </body>
 </html>

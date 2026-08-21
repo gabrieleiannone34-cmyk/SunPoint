@@ -78,5 +78,6 @@
         <p>Il tuo carrello è vuoto. Torna al catalogo per aggiungere un paio di occhiali!</p>
     <% } %>
     </div>
+    <jsp:include page="/footer.jsp" />
 </body>
 </html>

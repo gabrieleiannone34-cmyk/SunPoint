@@ -16,5 +16,6 @@
     <a href="${pageContext.request.contextPath}/index.jsp">Torna alla Home</a> | 
     <a href="${pageContext.request.contextPath}/CatalogoServlet">Continua lo shopping</a>
 	</div>
+	<jsp:include page="/footer.jsp" />
 </body>
 </html>

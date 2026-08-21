@@ -45,5 +45,6 @@
     </script>
     
     <script src="${pageContext.request.contextPath}/script/registrazione.js"></script>
+    <jsp:include page="/footer.jsp" />
 </body>
 </html>

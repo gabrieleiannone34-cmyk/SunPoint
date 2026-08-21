@@ -38,5 +38,6 @@
         <p>Vai al <a href="${pageContext.request.contextPath}/CatalogoServlet">Catalogo</a> per iniziare i tuoi acquisti!</p>
     <% } %>
     </div>
+    <jsp:include page="/footer.jsp" />
 </body>
 </html>

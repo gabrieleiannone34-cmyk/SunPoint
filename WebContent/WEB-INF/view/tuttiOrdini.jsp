@@ -52,6 +52,6 @@
     <% } else { %>
         <p>Nessun ordine effettuato nel negozio per ora.</p>
     <% } %>
-
+	<jsp:include page="/footer.jsp" />
 </body>
 </html>

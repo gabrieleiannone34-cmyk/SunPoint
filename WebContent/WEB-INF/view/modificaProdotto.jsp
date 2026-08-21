@@ -38,5 +38,6 @@
 	<br>
 	<a href="${pageContext.request.contextPath}/CatalogoServlet">Annulla e torna al Catalogo</a>
 	</div>
+	<jsp:include page="/footer.jsp" />
 </body>
 </html>
