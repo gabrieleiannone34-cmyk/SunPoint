@@ -45,8 +45,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		UtenteDAO utenteDAO = new UtenteDAO();
 		try {
 			utenteDAO.doSave(nuovoUtente);
-			
-			
+
 			request.setAttribute("messaggio", "Registrazione avvenuta con successo");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);

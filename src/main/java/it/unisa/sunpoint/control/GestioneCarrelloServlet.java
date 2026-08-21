@@ -39,7 +39,6 @@ public class GestioneCarrelloServlet extends HttpServlet {
 			for (int i = 0; i < carrello.size(); i++) {
 				ItemCarrello item = carrello.get(i);
 				if (item.getProdotto().getId() == idProdotto) {
-					
 					if ("aumenta".equals(azione)) {
 						try {
 							Prodotto occhialeDb = prodottoDAO.doRetrieveById(idProdotto);
@@ -47,7 +46,6 @@ public class GestioneCarrelloServlet extends HttpServlet {
 								if (item.getQuantita() < occhialeDb.getQuantita()) {
 									item.incrementaQuantita();
 								} else {
-									
 									response.sendRedirect(request.getContextPath() + "/VisualizzaCarrelloServlet?errore=esaurito");
 									return; 
 								}

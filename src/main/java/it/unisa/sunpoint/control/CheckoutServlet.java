@@ -23,11 +23,9 @@ import it.unisa.sunpoint.dao.ProdottoDAO;
 public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		HttpSession session = request.getSession();
-		
 		
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 		List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
@@ -57,29 +55,20 @@ public class CheckoutServlet extends HttpServlet {
         try {
         	
         	OrdineDAO ordineDAO = new OrdineDAO();
-        	
         	int orderId = ordineDAO.doSave(nuovoOrdine);
-        	
-        	
-            if (orderId > 0) {
-                
+            if (orderId > 0) { 
                 ordineDAO.salvaArticoliOrdine(orderId, carrello);
             }
-            
-           
+
             ProdottoDAO prodottoDAO = new ProdottoDAO();
             for (ItemCarrello item : carrello) {
                 prodottoDAO.aggiornaQuantita(item.getProdotto().getId());
             }
             
-            
             CarrelloDAO carrelloDAO = new CarrelloDAO();
             carrelloDAO.svuotaCarrelloDB(utente.getId());
-            
-        
             request.setAttribute("numeroOrdine", orderId);
             
-         
             session.removeAttribute("carrello");
             request.getRequestDispatcher("/WEB-INF/view/conferma.jsp").forward(request, response);
             

@@ -26,7 +26,6 @@ public class InserisciProdottoServlet extends HttpServlet {
 		
 
 		if (utente == null || !"admin".equals(utente.getRole())) {
-
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			return;
 		}
