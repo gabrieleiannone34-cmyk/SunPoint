@@ -79,33 +79,35 @@ public class CarrelloDAO {
     
     public List<ItemCarrello> caricaCarrello(int idUtente) throws SQLException {
         List<ItemCarrello> carrelloSalvato = new ArrayList<>();
-        
         String query = "SELECT p.*, ec.quantita AS quantita_carrello FROM ElementiCarrello ec JOIN Prodotti p ON ec.prodotto_id = p.id WHERE ec.user_id = ?";
                        
-        try (Connection con = ds.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-             
-            ps.setInt(1, idUtente);
-            
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    
-                    Prodotto p = new Prodotto();
-                    p.setId(rs.getInt("id"));
-                    p.setNome(rs.getString("nome"));
-                    p.setPrezzo(rs.getDouble("prezzo"));
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
 
-                    int quantita = rs.getInt("quantita");
-                    
-                    int quantitaNelCarrello = rs.getInt("quantita_carrello");
-					
-					ItemCarrello item = new ItemCarrello(p, quantitaNelCarrello);
-                    
-                   
-                    carrelloSalvato.add(item);
-                }
+        try {
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(query);
+        	preparedStatement.setInt(1, idUtente);
+            rs = preparedStatement.executeQuery();
+            
+            while (rs.next()) {
+                Prodotto p = new Prodotto();
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setPrezzo(rs.getDouble("prezzo"));
+
+                int quantitaNelCarrello = rs.getInt("quantita_carrello");
+                
+                ItemCarrello item = new ItemCarrello(p, quantitaNelCarrello);
+                carrelloSalvato.add(item);
             }
+        } finally { 
+            if (rs != null) { rs.close(); }
+            if (preparedStatement != null) { preparedStatement.close(); }
+            if (connection != null) { connection.close(); }
         }
+        
         return carrelloSalvato;
     }
 }
