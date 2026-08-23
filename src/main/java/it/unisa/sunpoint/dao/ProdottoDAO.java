@@ -116,9 +116,7 @@ public class ProdottoDAO {
         try {
             connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(updateSQL);
-            
             preparedStatement.setInt(1, idProdotto);
-
             preparedStatement.executeUpdate();
 
         } finally {
@@ -164,29 +162,26 @@ public class ProdottoDAO {
  				
  				String deleteCartSQL = "DELETE FROM ElementiCarrello WHERE prodotto_id = ?";
  				preparedStatement = connection.prepareStatement(deleteCartSQL);
- 				preparedStatement.setInt(1, id);
+ 				preparedStatement.setInt(1,id);
  				preparedStatement.executeUpdate();
  				preparedStatement.close(); 
  				
  				String deleteOrdersSQL = "DELETE FROM Articoli_ordinati WHERE product_id = ?";
  				preparedStatement = connection.prepareStatement(deleteOrdersSQL);
- 				preparedStatement.setInt(1, id);
+ 				preparedStatement.setInt(1,id);
  				preparedStatement.executeUpdate();
  				preparedStatement.close(); 
  				
-
  				String deleteSQL = "DELETE FROM Prodotti WHERE id = ?";
  				preparedStatement = connection.prepareStatement(deleteSQL);
- 				preparedStatement.setInt(1, id);
- 				
+ 				preparedStatement.setInt(1,id);
  				result = preparedStatement.executeUpdate();
 
  			} finally {
-
  				if (preparedStatement != null) preparedStatement.close();
  				if (connection != null) connection.close();
  			}
- 			
+
  			return (result != 0);
  		}
 

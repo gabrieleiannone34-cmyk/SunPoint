@@ -63,7 +63,6 @@ public class OrdineDAO {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
         
-        
         String insertSQL = "INSERT INTO Articoli_ordinati (order_id, product_id, quantita, prezzo_al_momento) VALUES (?, ?, ?, ?)";
         
         try {
@@ -73,11 +72,8 @@ public class OrdineDAO {
             for (ItemCarrello item : carrello) {
                 preparedStatement.setInt(1, orderId);
                 preparedStatement.setInt(2, item.getProdotto().getId());
-                
                 preparedStatement.setInt(3, item.getQuantita()); 
-                
                 preparedStatement.setDouble(4, item.getProdotto().getPrezzo());
-                
                 preparedStatement.executeUpdate(); 
             }
         } finally {
@@ -138,9 +134,7 @@ public class OrdineDAO {
 				ordine.setId(rs.getInt("id"));
 				ordine.setUserId(rs.getInt("user_id")); 
 				ordine.setDataOrdine(rs.getTimestamp("data_ordine"));
-				ordine.setTotale(rs.getDouble("totale"));
-				
-					
+				ordine.setTotale(rs.getDouble("totale"));	
 				tuttiOrdini.add(ordine);
 		}
 			
@@ -157,7 +151,7 @@ public class OrdineDAO {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		List<Ordine> ordiniFiltrati = new java.util.ArrayList<>();
+		List<Ordine> ordiniFiltrati = new ArrayList<>();
 			
 		StringBuilder query = new StringBuilder("SELECT * FROM Ordini WHERE 1=1");
 			
