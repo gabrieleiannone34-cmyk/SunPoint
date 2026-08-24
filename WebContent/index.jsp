@@ -70,6 +70,17 @@
                     <h4>Bambino</h4>
                 </div>
             </div>
+            <div class="bestseller-section">
+    			<h2 class="target-title">Il Nostro Best-Seller</h2>
+    			<div class="bestseller-gallery">
+        			<div class="bestseller-item">
+            			<img src="${pageContext.request.contextPath}/images/rayban_aviator.jpg" alt="Occhiale Best Seller">
+            			<h4>Modello Aviator Classic</h4>
+            			<p class="bestseller-prezzo">€ 89.90</p>
+            			<a href="${pageContext.request.contextPath}/CatalogoServlet" class="btn-compra">Scopri nel Catalogo</a>
+        			</div>
+    			</div>
+			</div>
         </div>
     <jsp:include page="/footer.jsp" />
 </body>

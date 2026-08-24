@@ -12,6 +12,7 @@ h1, h2, h3 {
     font-family: Georgia, "Times New Roman", Times, serif;
     font-weight: normal;
     color: #000000;
+    
 }
 
 
@@ -25,21 +26,20 @@ h1, h2, h3 {
 }
 
 header {
-    background-color: #000000;
+	background-image: url('../images/occ.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     color: #ffffff;
     padding: 30px 20px;
     text-align: center;
     text-transform: uppercase; 
 }
 
-footer {
-    background-color: #222222;
-    color: #aaaaaa;
-    text-align: center;
-    padding: 20px;
-    font-size: 0.8em; 
-    clear: both; 
-    margin-top: 40px;
+header h1 {
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.9), -2px -2px 5px rgba(255, 255, 255, 0.9);
 }
 
 
@@ -48,10 +48,7 @@ nav ul {
     list-style-type: none; 
     padding: 0;
     margin: 0;
-    background-image: url('images/occ.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background-color: transparent; 
     text-align: center;
 }
 
@@ -62,9 +59,12 @@ nav ul li {
 nav ul li a:link, nav ul li a:visited {
     display: block;
     padding: 15px 25px;
-    color: #ffffff;
+    color: #111111; 
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9); 
     text-decoration: none; 
     font-weight: bold;
+    font-size: 1.1em;
+    
 }
 
 nav ul li a:hover {
@@ -364,4 +364,155 @@ tr:nth-child(even) {
     width: auto;
     padding: 10px 20px;
     margin-bottom: 0;
+}
+
+
+
+.bestseller-section {
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+.bestseller-gallery {
+    display: flex;
+    justify-content: center; /* Questo centrerà perfettamente il tuo unico occhiale! */
+}
+
+.bestseller-item {
+    width: 50%; /* Occupa metà del container centrale */
+    max-width: 450px; /* Evita che diventi sproporzionato sui PC fissi */
+    background: #ffffff;
+    padding: 25px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.bestseller-item img {
+    width: 100%;
+    height: 300px; /* Un po' più alto per dare importanza */
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.bestseller-prezzo {
+    font-size: 1.8em; /* Prezzo un po' più grande */
+    color: #cc0000;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.btn-compra {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.btn-compra:hover {
+    background-color: #444;
+}
+
+
+
+footer {
+    background-color: #222222;
+    color: #aaaaaa;
+    text-align: center;
+    padding: 30px 20px 10px 20px; 
+    font-size: 0.9em; 
+    clear: both; 
+    margin-top: 40px;
+}
+
+/* Il contenitore flessibile per le due colonne */
+.footer-content {
+    display: flex;
+    justify-content: space-evenly; /* Divide lo spazio equamente in due */
+    flex-wrap: wrap; /* Fa andare a capo i blocchi sui cellulari */
+    margin-bottom: 25px;
+}
+
+.footer-section {
+    margin: 10px 20px;
+    max-width: 300px; /* Evita che il testo diventi una riga lunghissima */
+}
+
+.footer-section h3 {
+    color: #ffffff; /* Titoli bianchi per staccare dal testo grigio */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-link {
+    color: #aaaaaa;
+    text-decoration: underline;
+}
+
+.footer-link:hover {
+    color: #ffffff; /* Si illumina al passaggio del mouse! */
+}
+
+.copyright {
+    border-top: 1px solid #444444; /* Sottile linea divisoria */
+    padding-top: 15px;
+    font-size: 0.85em;
+}
+
+
+
+.chi-siamo-page {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.chi-siamo-content {
+    max-width: 800px; /* Evita che il testo si allarghi per tutto lo schermo */
+    margin: 0 auto 50px auto; /* Centra il blocco orizzontalmente */
+    text-align: center; /* Centra il testo internamente */
+}
+
+.chi-siamo-text p {
+    font-size: 1.1em;
+    line-height: 1.8; /* Aumentato leggermente per dare più respiro alla lettura */
+    color: #444444;
+    margin-bottom: 20px;
+}
+
+.chi-siamo-text h3 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #111111;
+}
+.valori-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-top: 1px solid #eeeeee; /* Riga divisoria elegante */
+    padding-top: 40px;
+}
+
+.valore-card {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    background-color: #fafafa;
+    padding: 25px 15px;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+}
+
+.valore-card h4 {
+    color: #111111;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }

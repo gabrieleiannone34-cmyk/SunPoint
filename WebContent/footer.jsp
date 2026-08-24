@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <footer>
-    <p>&copy; <%= java.time.Year.now().getValue() %> SunPoint. Tutti i diritti riservati.</p>
-    <p>Spedizione gratuita per ordini superiori a 50€ | Assistenza clienti: info@sunpoint.it</p>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Chi Siamo</h3>
+            <p>La tua destinazione per occhiali di design e tendenza.</p>
+            <a href="${pageContext.request.contextPath}/chi-siamo.jsp" class="footer-link">Scopri la nostra storia</a>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contattaci</h3>
+            <p>Email: info@sunpoint.it</p>
+            <p>Telefono: +39 081 123 4567</p>
+        </div>
+    </div>
+    
+    <p class="copyright">&copy; 2026 Sunpoint. Tutti i diritti riservati.</p>
 </footer>
