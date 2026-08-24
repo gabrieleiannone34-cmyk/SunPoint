@@ -48,7 +48,10 @@ nav ul {
     list-style-type: none; 
     padding: 0;
     margin: 0;
-    background-color: #333333;
+    background-image: url('images/occ.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     text-align: center;
 }
 
@@ -345,17 +348,16 @@ tr:nth-child(even) {
     display: flex;
     gap: 15px;
     align-items: center;
-    flex-wrap: wrap; /* Se lo schermo è piccolo, i filtri vanno a capo in automatico! */
+    flex-wrap: wrap; 
 }
 
 .filtri-catalogo label {
     font-weight: bold;
 }
 
-/* Evitiamo che gli input del filtro siano larghi il 100% dello schermo */
 .filtri-catalogo input[type="number"] {
     width: 150px;
-    margin-bottom: 0; /* Sovrascrive il margine di default degli input */
+    margin-bottom: 0; 
 }
 
 .filtri-catalogo input[type="submit"] {
