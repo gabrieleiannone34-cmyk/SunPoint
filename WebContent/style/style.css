@@ -431,21 +431,20 @@ footer {
     margin-top: 40px;
 }
 
-/* Il contenitore flessibile per le due colonne */
 .footer-content {
     display: flex;
-    justify-content: space-evenly; /* Divide lo spazio equamente in due */
-    flex-wrap: wrap; /* Fa andare a capo i blocchi sui cellulari */
+    justify-content: space-evenly; 
+    flex-wrap: wrap; 
     margin-bottom: 25px;
 }
 
 .footer-section {
     margin: 10px 20px;
-    max-width: 300px; /* Evita che il testo diventi una riga lunghissima */
+    max-width: 300px; 
 }
 
 .footer-section h3 {
-    color: #ffffff; /* Titoli bianchi per staccare dal testo grigio */
+    color: #ffffff; 
     margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -457,11 +456,11 @@ footer {
 }
 
 .footer-link:hover {
-    color: #ffffff; /* Si illumina al passaggio del mouse! */
+    color: #ffffff; 
 }
 
 .copyright {
-    border-top: 1px solid #444444; /* Sottile linea divisoria */
+    border-top: 1px solid #444444; 
     padding-top: 15px;
     font-size: 0.85em;
 }
@@ -474,14 +473,14 @@ footer {
 }
 
 .chi-siamo-content {
-    max-width: 800px; /* Evita che il testo si allarghi per tutto lo schermo */
-    margin: 0 auto 50px auto; /* Centra il blocco orizzontalmente */
-    text-align: center; /* Centra il testo internamente */
+    max-width: 800px; 
+    margin: 0 auto 50px auto; 
+    text-align: center; 
 }
 
 .chi-siamo-text p {
     font-size: 1.1em;
-    line-height: 1.8; /* Aumentato leggermente per dare più respiro alla lettura */
+    line-height: 1.8; 
     color: #444444;
     margin-bottom: 20px;
 }
@@ -497,7 +496,7 @@ footer {
     justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
-    border-top: 1px solid #eeeeee; /* Riga divisoria elegante */
+    border-top: 1px solid #eeeeee; 
     padding-top: 40px;
 }
 
