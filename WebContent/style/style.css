@@ -330,3 +330,36 @@ tr:nth-child(even) {
         margin-bottom: 30px;
     }
 }
+
+
+
+.filtri-catalogo {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+}
+
+.filtri-catalogo form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap; /* Se lo schermo è piccolo, i filtri vanno a capo in automatico! */
+}
+
+.filtri-catalogo label {
+    font-weight: bold;
+}
+
+/* Evitiamo che gli input del filtro siano larghi il 100% dello schermo */
+.filtri-catalogo input[type="number"] {
+    width: 150px;
+    margin-bottom: 0; /* Sovrascrive il margine di default degli input */
+}
+
+.filtri-catalogo input[type="submit"] {
+    width: auto;
+    padding: 10px 20px;
+    margin-bottom: 0;
+}

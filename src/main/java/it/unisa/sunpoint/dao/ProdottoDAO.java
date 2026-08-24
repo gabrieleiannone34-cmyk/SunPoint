@@ -208,4 +208,51 @@ public class ProdottoDAO {
 			if (connection != null) connection.close();
 		}
 	}
+ 	
+ 	public synchronized List<Prodotto> doRetrieveByFilters(Double minPrice, Double maxPrice) throws SQLException {
+ 	    Connection connection = null;
+ 	    PreparedStatement preparedStatement = null;
+ 	    ResultSet rs = null;
+ 	    List<Prodotto> prodottiFiltrati = new ArrayList<>();
+
+ 	    StringBuilder query = new StringBuilder("SELECT * FROM Prodotti WHERE 1=1");
+
+ 	    if (minPrice != null) {
+ 	        query.append(" AND prezzo >= ?");
+ 	    }
+ 	    if (maxPrice != null) {
+ 	        query.append(" AND prezzo <= ?");
+ 	    }
+
+ 	    try {
+ 	        connection = ds.getConnection();
+ 	        preparedStatement = connection.prepareStatement(query.toString());
+
+ 	        int paramIndex = 1;
+ 	        if (minPrice != null) {
+ 	            preparedStatement.setDouble(paramIndex++, minPrice);
+ 	        }
+ 	        if (maxPrice != null) {
+ 	            preparedStatement.setDouble(paramIndex++, maxPrice);
+ 	        }
+
+ 	        rs = preparedStatement.executeQuery();
+
+ 	        while (rs.next()) {
+ 	            Prodotto p = new Prodotto();
+ 	            p.setId(rs.getInt("id"));
+ 	            p.setNome(rs.getString("nome"));
+ 	            p.setDescrizione(rs.getString("descrizione"));
+ 	            p.setPrezzo(rs.getDouble("prezzo"));
+ 	            p.setQuantita(rs.getInt("quantita"));
+ 	            p.setImagePath(rs.getString("imagePath"));
+ 	            prodottiFiltrati.add(p);
+ 	        }
+ 	    } finally {
+ 	        if (rs != null) rs.close();
+ 	        if (preparedStatement != null) preparedStatement.close();
+ 	        if (connection != null) connection.close();
+ 	    }
+ 	    return prodottiFiltrati;
+ 	}
 }

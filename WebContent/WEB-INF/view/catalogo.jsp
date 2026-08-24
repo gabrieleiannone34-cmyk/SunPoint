@@ -20,6 +20,19 @@
         
         <h2>La nostra Collezione di Occhiali da Sole</h2>
         
+        <div class="filtri-catalogo">
+    		<form action="${pageContext.request.contextPath}/CatalogoServlet" method="GET">
+        		<label for="minPrice">Prezzo Min (€):</label>
+        		<input type="number" name="minPrice" id="minPrice" step="0.01" min="0" placeholder="Es. 10">
+        
+        		<label for="maxPrice">Prezzo Max (€):</label>
+        		<input type="number" name="maxPrice" id="maxPrice" step="0.01" min="0" placeholder="Es. 100">
+        
+        		<input type="submit" value="Filtra">
+        		<a href="${pageContext.request.contextPath}/CatalogoServlet">Resetta Filtri</a>
+    		</form>
+		</div>
+		
         <% 
             String errore = request.getParameter("errore");
             if ("esaurito".equals(errore)) { 

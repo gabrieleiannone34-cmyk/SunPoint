@@ -19,16 +19,24 @@ public class CatalogoServlet extends HttpServlet {
        
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProdottoDAO prodottoDAO = new ProdottoDAO();
-		
-		try {
-			
-            List<Prodotto> listaProdotti = prodottoDAO.doRetrieveAll();
-			
+		String minPriceStr = request.getParameter("minPrice");
+	    String maxPriceStr = request.getParameter("maxPrice");
+	    
+	    ProdottoDAO prodottoDAO = new ProdottoDAO();
+	    List<Prodotto> catalogo;
+	    
+	    try {
+	        if ((minPriceStr != null && !minPriceStr.isEmpty()) || (maxPriceStr != null && !maxPriceStr.isEmpty())) {
+	            
+	            Double minPrice = (minPriceStr != null && !minPriceStr.isEmpty()) ? Double.parseDouble(minPriceStr) : null;
+	            Double maxPrice = (maxPriceStr != null && !maxPriceStr.isEmpty()) ? Double.parseDouble(maxPriceStr) : null;
+	            
+	            catalogo = prodottoDAO.doRetrieveByFilters(minPrice, maxPrice);
+	        } else {
+	            catalogo = prodottoDAO.doRetrieveAll();
+	        }
             
-            request.setAttribute("catalogo", listaProdotti);
-            
-         
+            request.setAttribute("catalogo", catalogo);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/catalogo.jsp");
             dispatcher.forward(request, response);
 		} catch(SQLException e) {
