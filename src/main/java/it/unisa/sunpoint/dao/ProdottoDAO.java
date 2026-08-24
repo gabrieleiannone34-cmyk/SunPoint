@@ -245,7 +245,7 @@ public class ProdottoDAO {
  	            p.setDescrizione(rs.getString("descrizione"));
  	            p.setPrezzo(rs.getDouble("prezzo"));
  	            p.setQuantita(rs.getInt("quantita"));
- 	            p.setImagePath(rs.getString("imagePath"));
+ 	            p.setImagePath(rs.getString("image_path"));
  	            prodottiFiltrati.add(p);
  	        }
  	    } finally {
