@@ -20,7 +20,7 @@
         
         
         <% if (utente != null && "admin".equals(utente.getRole())) { %>
-            <div style="background-color: #f9f9f9; padding: 20px; border-left: 4px solid #000; margin-top: 30px;">
+            <div class="pannelli">
                 <h3>Pannello di Controllo Admin</h3>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/InserisciProdottoServlet">Inserisci un Nuovo Occhiale nel Catalogo</a></li>
@@ -29,7 +29,7 @@
             </div>
             
         <% } else if (utente != null && "user".equals(utente.getRole())) { %>
-            <div style="background-color: #f9f9f9; padding: 20px; border-left: 4px solid #555; margin-top: 30px;">
+            <div class="pannelli">
                 <h3>Area Personale</h3>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/StoricoOrdiniServlet">Visualizza lo Storico dei Miei Ordini</a></li>
@@ -51,37 +51,38 @@
             </div>
         </div> 
     </div>
+
     <div class="target-audience-section">
-            <h2 class="target-title">Adatto a tutti i generi e a tutte le età</h2>
+		<h2 class="target-title">Adatto a tutti i generi e a tutte le età</h2>
             
-            <div class="target-gallery">
-                <div class="target-item">
-                    <img src="${pageContext.request.contextPath}/images/donna.jpg" alt="Occhiali da sole per Donna">
-                    <h4>Donna</h4>
-                </div>
-                
-                <div class="target-item">
-                    <img src="${pageContext.request.contextPath}/images/uomo.jpg" alt="Occhiali da sole per Uomo">
-                    <h4>Uomo</h4>
-                </div>
-                
-                <div class="target-item">
-                    <img src="${pageContext.request.contextPath}/images/bambino.jpg" alt="Occhiali da sole per Bambino">
-                    <h4>Bambino</h4>
-                </div>
+		<div class="target-gallery">
+			<div class="target-item">
+				<img src="${pageContext.request.contextPath}/images/donna.jpg" alt="Occhiali da sole per Donna">
+                <h4>Donna</h4>
+			</div> 
+            <div class="target-item">
+               <img src="${pageContext.request.contextPath}/images/uomo.jpg" alt="Occhiali da sole per Uomo">
+ 	           <h4>Uomo</h4>
+       	    </div>
+            <div class="target-item">
+               <img src="${pageContext.request.contextPath}/images/bambino.jpg" alt="Occhiali da sole per Bambino">
+               <h4>Bambino</h4>
             </div>
-            <div class="bestseller-section">
-    			<h2 class="target-title">Il Nostro Best-Seller</h2>
-    			<div class="bestseller-gallery">
-        			<div class="bestseller-item">
-            			<img src="${pageContext.request.contextPath}/images/rayban_aviator.jpg" alt="Occhiale Best Seller">
-            			<h4>Modello Aviator Classic</h4>
-            			<p class="bestseller-prezzo">€ 89.90</p>
-            			<a href="${pageContext.request.contextPath}/CatalogoServlet" class="btn-compra">Scopri nel Catalogo</a>
-        			</div>
-    			</div>
-			</div>
         </div>
+	</div>
+		
+    <div class="bestseller-section">
+    	<h2 class="target-title">Il Nostro Best-Seller</h2>
+    		<div class="bestseller-gallery">
+        		<div class="bestseller-item">
+            		<img src="${pageContext.request.contextPath}/images/rayban_aviator.jpg" alt="Occhiale Best Seller">
+            		<h4>Modello Aviator Classic</h4>
+            		<p class="bestseller-prezzo">€ 145.5</p>
+            		<a href="${pageContext.request.contextPath}/CatalogoServlet" class="btn-compra">Scopri nel Catalogo</a>
+        		</div>
+    		</div>
+	</div>
+        
     <jsp:include page="/footer.jsp" />
 </body>
 </html>
