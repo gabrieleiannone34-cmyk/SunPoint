@@ -47,7 +47,7 @@
                 <tr>
                     <td><%= item.getProdotto().getNome() %></td>
                     <td>€ <%= item.getProdotto().getPrezzo() * item.getQuantita()%></td>
-                    <td><form action="<%= request.getContextPath() %>/GestioneCarrelloServlet" method="POST" style="display: inline-block;">
+                    <td><form action="<%= request.getContextPath() %>/GestioneCarrelloServlet" method="POST" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 5px;">
                             <input type="hidden" name="idProdotto" value="<%= item.getProdotto().getId() %>">
                             <button type="submit" name="azione" value="diminuisci" class="btn-quantita">-</button>  
                             <input type="text" value="<%= item.getQuantita() %>" readonly class="input-quantita">

@@ -19,6 +19,7 @@ h1, h2, h3 {
 	 padding: 20px; 
 	 border-left: 4px solid #000;
 	 margin-top: 30px;
+	 margin-bottom: 30px;
 }
 .error{
 	background-color: #ffe6e6; 
@@ -43,7 +44,7 @@ h1, h2, h3 {
 header {
 	background-image: url('../images/occ.jpg');
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center ;
     background-size: cover;
     color: #ffffff;
     padding: 30px 20px;
@@ -78,7 +79,7 @@ nav ul li a:link, nav ul li a:visited {
     text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9); 
     text-decoration: none; 
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 110%;
     
 }
 
@@ -119,13 +120,13 @@ nav ul li a:hover {
 }
 
 .prodotto-titolo {
-    font-size: 1.2em;
+    font-size: 120%;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 .prodotto-prezzo {
-    font-size: 1.4em;
+    font-size: 140%;
     color: #cc0000;
     font-weight: bold;
     margin-bottom: 20px;
@@ -135,7 +136,7 @@ nav ul li a:hover {
 .descrizione-occhiale {
     height: 120px; 
     overflow-y: auto; 
-    font-size: 0.9em;
+    font-size: 90%;
     margin-bottom: 15px;
     padding-right: 5px;
 }
@@ -170,9 +171,8 @@ input[type="text"], input[type="number"], input[type="date"], textarea {
     border: 1px solid #ccc;
     color: #333;
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 5px 10px ;
     cursor: pointer;
-    transition: background-color 0.2s;
 }
 
 .btn-quantita:hover {
@@ -180,11 +180,11 @@ input[type="text"], input[type="number"], input[type="date"], textarea {
 }
 
 .input-quantita {
-    width: 40px;
+    width: 100px !important;
     text-align: center;
     border: 1px solid #ccc;
     padding: 5px;
-    margin: 0 5px;
+    margin: 0 5px !important;
     font-weight: bold;
 }
 
@@ -237,29 +237,13 @@ tr:nth-child(even) {
         border-bottom: 1px solid #444444;
     }
 }
+
+
 .regstyle{
 	color: #ff0000;
 	font-weight: bold;
 	margin-left: 10px;
-	font-size: 0.9em;
-}
-
-.btn-hero {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 15px 35px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 1.1em;
-    border: 2px solid #ffffff;
-    border-radius: 30px; 
-    transition: all 0.3s ease;
-}
-
-.btn-hero:hover {
-    background-color: transparent;
-    color: #ffffff;
+	font-size: 90%;
 }
 
 .features-section {
@@ -281,7 +265,7 @@ tr:nth-child(even) {
 
 .feature-box h3 {
     margin-top: 0;
-    font-size: 1.3em;
+    font-size: 130%;
     font-weight: bold;
     color: #000000;
 }
@@ -301,7 +285,7 @@ tr:nth-child(even) {
 }
 
 .target-title {
-    font-size: 2em;
+    font-size: 200%;
     margin-bottom: 30px;
     font-weight: bold;
     color: #333;
@@ -333,7 +317,7 @@ tr:nth-child(even) {
 
 .target-item h4 {
     margin-top: 15px;
-    font-size: 1.3em;
+    font-size: 130%;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -391,12 +375,12 @@ tr:nth-child(even) {
 
 .bestseller-gallery {
     display: flex;
-    justify-content: center; /* Questo centrerà perfettamente il tuo unico occhiale! */
+    justify-content: center; 
 }
 
 .bestseller-item {
-    width: 50%; /* Occupa metà del container centrale */
-    max-width: 450px; /* Evita che diventi sproporzionato sui PC fissi */
+    width: 50%; 
+    max-width: 450px; 
     background: #ffffff;
     padding: 25px;
     border: 1px solid #e0e0e0;
@@ -406,14 +390,14 @@ tr:nth-child(even) {
 
 .bestseller-item img {
     width: 100%;
-    height: 300px; /* Un po' più alto per dare importanza */
+    height: 300px; 
     object-fit: cover;
     border-radius: 4px;
     margin-bottom: 15px;
 }
 
 .bestseller-prezzo {
-    font-size: 1.8em; /* Prezzo un po' più grande */
+    font-size: 180%; 
     color: #cc0000;
     font-weight: bold;
     margin: 15px 0;
@@ -441,7 +425,7 @@ footer {
     color: #aaaaaa;
     text-align: center;
     padding: 30px 20px 10px 20px; 
-    font-size: 0.9em; 
+    font-size: 90%; 
     clear: both; 
     margin-top: 40px;
 }
@@ -477,7 +461,7 @@ footer {
 .copyright {
     border-top: 1px solid #444444; 
     padding-top: 15px;
-    font-size: 0.85em;
+    font-size: 85%;
 }
 
 
@@ -487,6 +471,11 @@ footer {
     margin-bottom: 60px;
 }
 
+.chi-siamo-page h2{
+	text-align: center; 
+	margin-bottom: 40px;
+}
+
 .chi-siamo-content {
     max-width: 800px; 
     margin: 0 auto 50px auto; 
@@ -494,8 +483,8 @@ footer {
 }
 
 .chi-siamo-text p {
-    font-size: 1.1em;
-    line-height: 1.8; 
+    font-size: 110%;
+    line-height: 180%; 
     color: #444444;
     margin-bottom: 20px;
 }
