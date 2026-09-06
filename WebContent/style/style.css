@@ -239,6 +239,7 @@ tr:nth-child(even) {
 }
 
 
+
 .regstyle{
 	color: #ff0000;
 	font-weight: bold;
@@ -278,30 +279,30 @@ tr:nth-child(even) {
 
 
 
-.target-audience-section {
+.sezioni {
     text-align: center;
     margin-top: 60px; 
     margin-bottom: 40px;
 }
 
-.target-title {
+.sezioni-title {
     font-size: 200%;
     margin-bottom: 30px;
     font-weight: bold;
     color: #333;
 }
 
-.target-gallery {
+.sezioni-gallery {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
 
-.target-item {
+.sezioni-item {
     width: 32%; 
 }
 
-.target-item img {
+.sezioni-item img {
     width: 100%;
     height: 350px; 
     object-fit: cover;
@@ -311,11 +312,11 @@ tr:nth-child(even) {
 }
 
 
-.target-item img:hover {
+.sezioni-item img:hover {
     transform: scale(1.03);
 }
 
-.target-item h4 {
+.sezioni-item h4 {
     margin-top: 15px;
     font-size: 130%;
     text-transform: uppercase;
@@ -324,10 +325,10 @@ tr:nth-child(even) {
 
 
 @media screen and (max-width: 768px) {
-    .target-gallery {
+    .sezioni-gallery {
         flex-direction: column; 
     }
-    .target-item {
+    .sezioni-item {
         width: 100%;
         margin-bottom: 30px;
     }

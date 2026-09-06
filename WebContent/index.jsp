@@ -52,10 +52,10 @@
         </div> 
     </div>
 
-    <div class="target-audience-section">
-		<h2 class="target-title">Adatto a tutti i generi e a tutte le età</h2>
+    <div class="sezioni">
+		<h2 class="sezioni-title">Adatto a tutti i generi e a tutte le età</h2>
             
-		<div class="target-gallery">
+		<div class="sezioni-gallery">
 			<div class="target-item">
 				<img src="${pageContext.request.contextPath}/images/donna.jpg" alt="Occhiali da sole per Donna">
                 <h4>Donna</h4>
