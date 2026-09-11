@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SunPoint - Home</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
@@ -56,15 +56,15 @@
 		<h2 class="sezioni-title">Adatto a tutti i generi e a tutte le età</h2>
             
 		<div class="sezioni-gallery">
-			<div class="target-item">
+			<div class="sezioni-item">
 				<img src="${pageContext.request.contextPath}/images/donna.jpg" alt="Occhiali da sole per Donna">
                 <h4>Donna</h4>
 			</div> 
-            <div class="target-item">
+            <div class="sezioni-item">
                <img src="${pageContext.request.contextPath}/images/uomo.jpg" alt="Occhiali da sole per Uomo">
  	           <h4>Uomo</h4>
        	    </div>
-            <div class="target-item">
+            <div class="sezioni-item">
                <img src="${pageContext.request.contextPath}/images/bambino.jpg" alt="Occhiali da sole per Bambino">
                <h4>Bambino</h4>
             </div>
@@ -72,7 +72,7 @@
 	</div>
 		
     <div class="bestseller-section">
-    	<h2 class="target-title">Il Nostro Best-Seller</h2>
+    	<h2 class="sezioni-title">Il Nostro Best-Seller</h2>
     		<div class="bestseller-gallery">
         		<div class="bestseller-item">
             		<img src="${pageContext.request.contextPath}/images/rayban_aviator.jpg" alt="Occhiale Best Seller">

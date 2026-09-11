@@ -29,24 +29,17 @@ public class CarrelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int idProdotto = Integer.parseInt(request.getParameter("idProdotto"));
-		
 		ProdottoDAO prodottoDAO = new ProdottoDAO();
-		
 		try {
-			
 			Prodotto occhialeScelto = prodottoDAO.doRetrieveById(idProdotto);
-			
 			if (occhialeScelto != null) {
-				
 				HttpSession session = request.getSession();
-				
-				
+
                 List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
                 if (carrello == null) {
                     carrello = new ArrayList<>();
                 }
-                
-             
+
                 ItemCarrello itemTrovato = null;
                 int pezziGiaNelCarrello = 0;
                 for (ItemCarrello item : carrello) {

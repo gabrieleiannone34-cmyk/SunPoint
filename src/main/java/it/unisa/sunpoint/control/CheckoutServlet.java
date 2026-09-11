@@ -1,5 +1,6 @@
 package it.unisa.sunpoint.control;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +25,12 @@ public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/checkout.jsp");
+        dispatcher.forward(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
@@ -76,12 +82,7 @@ public class CheckoutServlet extends HttpServlet {
         	e.printStackTrace();
             response.getWriter().println("Errore durante il salvataggio dell'ordine nel database.");
         }
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
 	}
 
 }
