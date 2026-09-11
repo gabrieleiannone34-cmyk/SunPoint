@@ -67,9 +67,9 @@
         </table>
         
         <h3>Totale da pagare: € <%= totale %></h3>
-        <form action="${pageContext.request.contextPath}/CheckoutServlet" method="GET">
-            <input type="submit" value="Procedi al Checkout">
-        </form>
+        <form action="${pageContext.request.contextPath}/checkout.jsp" method="GET">
+    		<input type="submit" value="Procedi al Checkout">
+		</form>
         <br>
         
         <a href="${pageContext.request.contextPath}/SvuotaCarrelloServlet">Svuota il Carrello</a>
